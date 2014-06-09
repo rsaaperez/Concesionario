@@ -348,7 +348,7 @@
                             <Column editable="true" title="Nombre" type="java.lang.Object"/>
                             <Column editable="true" title="Tipo" type="java.lang.Object"/>
                             <Column editable="true" title="Rareza" type="java.lang.Object"/>
-                            <Column editable="true" title="Coste Mana Convertido" type="java.lang.Object"/>
+                            <Column editable="true" title="Habilidad" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -760,6 +760,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bA&#xf1;adirActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="rAIncoloro">
                   <Properties>

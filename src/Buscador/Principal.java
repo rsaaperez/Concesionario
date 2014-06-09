@@ -6,12 +6,14 @@
 
 package Buscador;
 
+import Objetos.Cartas;
+
 /**
  *
  * @author DAM1_16
  */
 public class Principal extends javax.swing.JFrame {
-
+    Cartas c;
     /**
      * Creates new form Principal
      */
@@ -244,7 +246,7 @@ public class Principal extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Nombre", "Tipo", "Rareza", "Coste Mana Convertido"
+                "Nombre", "Tipo", "Rareza", "Habilidad"
             }
         ));
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -355,6 +357,11 @@ public class Principal extends javax.swing.JFrame {
         cADefensa.setEnabled(false);
 
         bAñadir.setText("Añadir");
+        bAñadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bAñadirActionPerformed(evt);
+            }
+        });
 
         rAIncoloro.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rAIncoloro.setForeground(new java.awt.Color(102, 102, 102));
@@ -1072,6 +1079,11 @@ public class Principal extends javax.swing.JFrame {
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
+        Conexion.insertar(c);
+        
+    }//GEN-LAST:event_bAñadirActionPerformed
 
     /**
      * @param args the command line arguments
