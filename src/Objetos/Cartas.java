@@ -61,4 +61,16 @@ public class Cartas{
     public void setHabilidad(String habilidad) {
         this.habilidad = habilidad;
     }
+    public int getCoste(Cartas c){
+        return 0;
+    }
+    public String getCol(Cartas c){
+        return null;
+    }
+    public int getFue(Cartas c){
+        return 0;
+    }
+    public int getDef(Cartas c){
+        return 0;
+    }
 }

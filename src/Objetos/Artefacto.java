@@ -36,5 +36,11 @@ public class Artefacto extends Cartas{
     public void setColor(String color) {
         this.color = color;
     }
+    public int getCoste(Cartas c){
+        return cmc;
+    }
+    public String getCol(Cartas c){
+        return color;
+    }
 
 }

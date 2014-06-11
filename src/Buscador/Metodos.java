@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscador;
+package Buscador;
 
 import Objetos.Instantaneo;
 import Objetos.Tierra;

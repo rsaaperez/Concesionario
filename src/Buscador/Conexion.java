@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package buscador;
+package Buscador;
 
 import Objetos.Cartas;
 import com.mysql.jdbc.Connection;
@@ -21,15 +21,15 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    static Connection conexion = null;
+    Connection conexion = null;
 
-    public static Statement GetConnection() {
+    public Statement GetConnection() {
         Statement st = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String servidor = "jdbc:mysql://localhost/baseCartas";
             String usuarioDB = "root";
-            String passwordDB = "asdf";
+            String passwordDB = "root";
             conexion = (Connection) DriverManager.getConnection(servidor, usuarioDB, passwordDB);
             st = (Statement) conexion.createStatement();
         } catch (Exception ex) {
@@ -40,7 +40,7 @@ public class Conexion {
         }
     }
 
-    public static void cerrarCon(Connection conexion) {
+    public void cerrarCon(Connection conexion) {
         try {
             conexion.close();
         } catch (Exception ex) {
@@ -49,50 +49,46 @@ public class Conexion {
         }
     }
 
-    public static void insertar(Cartas c) {
+    public void insertar(Cartas c) {
         try {
-            if(c.getClass().getName().equalsIgnoreCase("Objetos.Criatura")){
+            if (c.getClass().getName().equalsIgnoreCase("Objetos.Criatura")) {
                 try {
-                    GetConnection().executeUpdate("INSERT INTO criatura (nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"', '"+c.getClass().getMethod("getFuerza", null).toString()+"', '"+c.getClass().getMethod("getDefensa", null).toString()+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                    GetConnection().executeUpdate("INSERT INTO criatura (nombre, cmc, color, fuerza, defensa) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "', '" + c.getFue(c) + "', '" + c.getDef(c) + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Artefacto")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Artefacto")) {
                 try {
-                    GetConnection().executeUpdate("INSERT INTO artefacto (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                    GetConnection().executeUpdate("INSERT INTO artefacto (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Conjuro")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Conjuro")) {
                 try {
-                    GetConnection().executeUpdate("INSERT INTO conjuro (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                    GetConnection().executeUpdate("INSERT INTO conjuro (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Encantamiento")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Encantamiento")) {
                 try {
-                    GetConnection().executeUpdate("INSERT INTO encantamento (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                    GetConnection().executeUpdate("INSERT INTO encantamento (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Instantaneo")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Instantaneo")) {
                 try {
-                    GetConnection().executeUpdate("INSERT INTO Instantaneo (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                    GetConnection().executeUpdate("INSERT INTO Instantaneo (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Tierra")){
-            GetConnection().executeUpdate("INSERT INTO Tierra (nombre, tipo, rareza, habilidad) VALUES ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"' )");
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Tierra")) {
+                GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "'");
+                GetConnection().executeUpdate("INSERT INTO Tierra (nombre) VALUES ('" + c.getNombre() + "')");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,70 +110,68 @@ public class Conexion {
             return ResultSetToArray(rs);
         }
     }
+
     private Object[][] ResultSetToArray(ResultSet rs) {
-		Object obj[][] = null;
-		int j = 0;
-		try {
-			rs.last();
-			ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
-			int numCols = rsmd.getColumnCount();
-			int numFils = rs.getRow();
-			obj = new Object[numFils][numCols];		
-			rs.beforeFirst();
-			while (rs.next()) {
-				for (int i = 0; i < numCols; i++) {
-					obj[j][i] = rs.getObject(i + 1);
-				}
-				j++;
-			}
-		} catch (Exception e) {
-		}
-		return obj;
-	}
-     public static void editar(Cartas c, String nom) {
+        Object obj[][] = null;
+        int j = 0;
         try {
-            if(c.getClass().getName().equalsIgnoreCase("Objetos.Criatura")){
+            rs.last();
+            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            int numCols = rsmd.getColumnCount();
+            int numFils = rs.getRow();
+            obj = new Object[numFils][numCols];
+            rs.beforeFirst();
+            while (rs.next()) {
+                for (int i = 0; i < numCols; i++) {
+                    obj[j][i] = rs.getObject(i + 1);
+                }
+                j++;
+            }
+        } catch (Exception e) {
+        }
+        return obj;
+    }
+
+    public void editar(Cartas c, String nom) {
+        try {
+            if (c.getClass().getName().equalsIgnoreCase("Objetos.Criatura")) {
                 try {
-                    GetConnection().executeUpdate("UPDATE INTO criatura (nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"', '"+c.getClass().getMethod("getFuerza", null).toString()+"', '"+c.getClass().getMethod("getDefensa", null).toString()+"') WHERE nombre='"+nom+"'");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE INTO criatura (nombre, cmc, color, fuerza, defensa) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "', '" + c.getFue(c) + "', '" + c.getDef(c) + "') WHERE nombre='" + nom + "'");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Artefacto")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Artefacto")) {
                 try {
-                    GetConnection().executeUpdate("UPDATE INTO artefacto (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"') WHERE nombre='"+nom+"'");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE INTO artefacto (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Conjuro")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Conjuro")) {
                 try {
-                    GetConnection().executeUpdate("UPDATE INTO conjuro (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"') WHERE nombre='"+nom+"'");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE INTO conjuro (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Encantamiento")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Encantamiento")) {
                 try {
-                    GetConnection().executeUpdate("UPDATE INTO encantamento (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"') WHERE nombre='"+nom+"'");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE INTO encantamento (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Instantaneo")){
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Instantaneo")) {
                 try {
-                    GetConnection().executeUpdate("UPDATE INTO Instantaneo (nombre, tipo, rareza, habilidad, cmc, color) values ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"', '"+c.getClass().getMethod("getCmc", null).toString()+"', '"+c.getClass().getMethod("getColor", null).toString()+"' WHERE nombre='"+nom+"')");
-                } catch (NoSuchMethodException ex) {
-                    Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE INTO Instantaneo (nombre, cmc, color) values ('" + c.getNombre() + "','" + c.getCoste(c) + "', '" + c.getCol(c) + "' WHERE nombre='" + nom + "')");
                 } catch (SecurityException ex) {
                     Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }else if(c.getClass().getName().equalsIgnoreCase("Objetos.Tierra")){
-            GetConnection().executeUpdate("UPDATE INTO Tierra (nombre, tipo, rareza, habilidad) VALUES ('"+c.getNombre()+"', '"+c.getTipo()+"', '"+c.getRareza()+"', '"+c.getHabilidad()+"' ) WHERE nombre='"+nom+"'");
+            } else if (c.getClass().getName().equalsIgnoreCase("Objetos.Tierra")) {
+                GetConnection().executeUpdate("UPDATE INTO carta (nombre, tipo, rareza, habilidad) values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "'");
+                GetConnection().executeUpdate("UPDATE INTO Tierra (nombre) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "' ) WHERE nombre='" + nom + "'");
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);

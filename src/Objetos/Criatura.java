@@ -58,5 +58,17 @@ public class Criatura extends Cartas{
     public void setDefensa(int defensa) {
         this.defensa = defensa;
     }
+    public int getCoste(Cartas c){
+        return cmc;
+    }
+    public String getCol(Cartas c){
+        return color;
+    }
+    public int getFue(Cartas c){
+        return fuerza;
+    }
+    public int getDef(Cartas c){
+        return defensa;
+    }
 
 }

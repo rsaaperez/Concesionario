@@ -14,6 +14,7 @@ import Objetos.Cartas;
  */
 public class Principal extends javax.swing.JFrame {
     Cartas c;
+    Conexion con = new Conexion();
     /**
      * Creates new form Principal
      */
@@ -1081,8 +1082,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
-        Conexion.insertar(c);
-        
+        con.insertar(c);
     }//GEN-LAST:event_bAñadirActionPerformed
 
     /**
