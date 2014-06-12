@@ -100,7 +100,7 @@ public class Conexion {
         //Array
         try {
             Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM tab");
+            rs = (ResultSet) st.executeQuery("SELECT * FROM cartas");
             //boolean r = rs.next();
             st.close();
         } catch (SQLException ex) {

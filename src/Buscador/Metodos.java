@@ -22,30 +22,22 @@ import javax.swing.JOptionPane;
  */
 public class Metodos {
 
-    public static boolean existe(File ficheiro, String nomeBuscar) {
-        // abrimos o ficheiro para ler e, se existe a carta devolve true
-        ObjectInputStream fich = null;
-        Cartas aux = null;
+    public static boolean existe(String nomeBuscar) {
+        Conexion cox = new Conexion();
+        Cartas aux[][] = null;
         boolean existe = false;
         try {
-            fich = new ObjectInputStream(new FileInputStream(ficheiro));
-            aux = (Cartas) fich.readObject();
-            while (fich != null) {
-                if (aux.getNombre().compareToIgnoreCase(nomeBuscar) == 0) {
-                    existe = true;
+            aux = (Cartas[][]) cox.seleccionarLista();
+            for (int i = 0; i < aux.length; i++) {
+                for (int j = 0; j < aux[i].length; j++) {
+                    if (aux[i][j].getNombre().compareToIgnoreCase(nomeBuscar) == 0) {
+                        existe = true;
+                    }
                 }
-                aux = (Cartas) fich.readObject();
             }
-        } catch (EOFException e) {
-            System.out.println("fin ficheiro " + e.getMessage());
         } catch (Exception ex) {
             System.out.println("erro existe " + ex.getMessage());
         } finally {
-            try {
-                fich.close();
-            } catch (IOException ex) {
-                System.out.println("erro no peche " + ex.getMessage());
-            }
             return existe;
         }
     }
@@ -162,7 +154,7 @@ public class Metodos {
                 }
             } while (defensa < 0 || defensa > 15);
             tipo = "Criatura";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
                 x = true;
@@ -186,7 +178,7 @@ public class Metodos {
             rareza = JOptionPane.showInputDialog("Introduce la rareza del encnatamiento:");
             habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del encantamiento:");
             tipo = "Encantamiento";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
                 x = true;
@@ -210,7 +202,7 @@ public class Metodos {
             rareza = JOptionPane.showInputDialog("Introduce la rareza del instantaneo:");
             habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del instantaneo:");
             tipo = "Instantaneo";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
                 x = true;
@@ -234,7 +226,7 @@ public class Metodos {
             rareza = JOptionPane.showInputDialog("Introduce la rareza del conjuro:");
             habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del conjuro:");
             tipo = "Conjuro";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
                 x = true;
@@ -258,7 +250,7 @@ public class Metodos {
             rareza = JOptionPane.showInputDialog("Introduce la rareza del artefacto:");
             habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del artefacto:");
             tipo = "Artefacto";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
                 x = true;
@@ -278,7 +270,7 @@ public class Metodos {
             rareza = JOptionPane.showInputDialog("Introduce la rareza de la tierra:");
             habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades de la tierra:");
             tipo = "Tierra";
-            boolean bol = existe(fich, nombre);
+            boolean bol = existe(nombre);
             if (bol = true) {
                 carta = new Tierra(habilidad, nombre, tipo, rareza);
                 x = true;
