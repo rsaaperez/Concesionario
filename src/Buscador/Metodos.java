@@ -4,13 +4,7 @@
  */
 package Buscador;
 
-import Objetos.Instantaneo;
-import Objetos.Tierra;
-import Objetos.Encantamiento;
-import Objetos.Conjuro;
-import Objetos.Criatura;
-import Objetos.Cartas;
-import Objetos.Artefacto;
+import Objetos.*;
 import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Metodos {
 
+    //Creamos un metodo para comprobar si existen las cartas.
     public static boolean existe(String nomeBuscar) {
         Conexion cox = new Conexion();
         Cartas aux[][] = null;
@@ -42,245 +37,110 @@ public class Metodos {
         }
     }
 
-    //Creamos un metodo para que el usuario pueda añadir sus propias cartas.
-    public static void insertar(File fichero, File fcria, File fencan, File finst, File fart, File ftier, File fconj) {
-        Criatura cria = null;
-        Encantamiento encan = null;
-        Conjuro conj = null;
-        Instantaneo instan = null;
-        Artefacto arte = null;
-        Tierra ti = null;
-        NuestroStream fich = null;
-        NuestroStream fcri = null;
-        NuestroStream fen = null;
-        NuestroStream fin = null;
-        NuestroStream far = null;
-        NuestroStream ft = null;
-        NuestroStream fcon = null;
-        int menu = Integer.parseInt(JOptionPane.showInputDialog("¿Que tipo de carta desea introducir?\n1.-Criatura.\n2.-Encantamiento.\n3.-Instantaneo.\n4.-Conjuro.\n5.-Artefacto.\n6.-Tierra.\n7.-Dejar de introducir cartas."));
-        switch (menu) {
-            case 1:
-                cria = pedirCriatura(fcria);
-                break;
-            case 2:
-                encan = pedirEncantamiento(fencan);
-                break;
-            case 3:
-                instan = pedirInstantaneo(finst);
-                break;
-            case 4:
-                conj = pedirConjuro(fconj);
-                break;
-            case 5:
-                arte = pedirArtefacto(fart);
-                break;
-            case 6:
-                ti = pedirTierra(ftier);
-                break;
-            case 7:
-                JOptionPane.showMessageDialog(null, "Programa finalizado.");
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "No has seleccionado ninguna opcion permitida.");
-        }
-
-        try {
-            fich = new NuestroStream(new FileOutputStream(fichero, true));
-            fcri = new NuestroStream(new FileOutputStream(fcria, true));
-            fen = new NuestroStream(new FileOutputStream(fencan, true));
-            fin = new NuestroStream(new FileOutputStream(finst, true));
-            far = new NuestroStream(new FileOutputStream(fart, true));
-            ft = new NuestroStream(new FileOutputStream(ftier, true));
-            fcon = new NuestroStream(new FileOutputStream(fconj, true));
-            if (menu == 1) {
-                fich.writeObject(new Criatura(cria.getCmc(), cria.getColor(), cria.getHabilidad(), cria.getFuerza(), cria.getDefensa(), cria.getNombre(), cria.getTipo(), cria.getRareza()));
-                fcri.writeObject(new Criatura(cria.getCmc(), cria.getColor(), cria.getHabilidad(), cria.getFuerza(), cria.getDefensa(), cria.getNombre(), cria.getTipo(), cria.getRareza()));
-            }
-            if (menu == 2) {
-                fich.writeObject(new Encantamiento(encan.getCmc(), encan.getColor(), encan.getHabilidad(), encan.getNombre(), encan.getTipo(), encan.getRareza()));
-                fen.writeObject(new Encantamiento(encan.getCmc(), encan.getColor(), encan.getHabilidad(), encan.getNombre(), encan.getTipo(), encan.getRareza()));
-            }
-            if (menu == 3) {
-                fich.writeObject(new Instantaneo(instan.getCmc(), instan.getColor(), instan.getHabilidad(), instan.getNombre(), instan.getTipo(), instan.getRareza()));
-                fin.writeObject(new Instantaneo(instan.getCmc(), instan.getColor(), instan.getHabilidad(), instan.getNombre(), instan.getTipo(), instan.getRareza()));
-            }
-            if (menu == 4) {
-                fich.writeObject(new Conjuro(conj.getCmc(), conj.getColor(), conj.getHabilidad(), conj.getNombre(), conj.getTipo(), conj.getRareza()));
-                fcon.writeObject(new Conjuro(conj.getCmc(), conj.getColor(), conj.getHabilidad(), conj.getNombre(), conj.getTipo(), conj.getRareza()));
-            }
-            if (menu == 5) {
-                fich.writeObject(new Artefacto(arte.getCmc(), arte.getColor(), arte.getHabilidad(), arte.getNombre(), arte.getTipo(), arte.getRareza()));
-                far.writeObject(new Artefacto(arte.getCmc(), arte.getColor(), arte.getHabilidad(), arte.getNombre(), arte.getTipo(), arte.getRareza()));
-            }
-            if (menu == 6) {
-                fich.writeObject(new Tierra(ti.getHabilidad(), ti.getNombre(), ti.getTipo(), ti.getRareza()));
-                ft.writeObject(new Tierra(ti.getHabilidad(), ti.getNombre(), ti.getTipo(), ti.getRareza()));
-            }
-        } catch (IOException e) {
-            System.out.println("Error " + e.getMessage());
-        } finally {
-            if (fich != null) {
-                try {
-                    fich.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                }
+    //Creamos un metodo para crear los objetos y llamar a insertar en la clase conexion.
+    public static void insertar(String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
+        Cartas c = null;
+        Conexion cox = new Conexion();
+        if (existe(nombre) == false) {
+            switch (tipo) {
+                case "criatura":
+                    c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
+                case "encantamiento":
+                    c = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
+                case "artefacto":
+                    c = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
+                case "instantaneo":
+                    c = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
+                case "conjuro":
+                    c = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
+                case "tierra":
+                    c = new Tierra(habilidad, nombre, tipo, rareza);
+                    cox.insertar(c);
+                    break;
             }
         }
     }
 
-    public static Criatura pedirCriatura(File fich) {
-        String nombre = null, color = null, rareza = null, habilidad = null, tipo = null;
-        int cmc = 0, fuerza = -1, defensa = -1;
-        Criatura carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre de la criatura que deseas añadir:");
-            String cmana = JOptionPane.showInputDialog("Introduce el coste de mana convertido de la criatura:");
-            cmc = Integer.parseInt(cmana);
-            color = JOptionPane.showInputDialog("Introduce el color o colores de la criatura:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza de la criatura:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades de la criatura:");
-            do {
-                String cf = JOptionPane.showInputDialog("Introduce su fuerza:");
-                if (Integer.parseInt(cf) >= 0 && Integer.parseInt(cf) <= 15) {
-                    fuerza = Integer.parseInt(cf);
-                }
-            } while (fuerza < 0 || fuerza > 15);
-            do {
-                String cd = JOptionPane.showInputDialog("Introduce su defensa:");
-                if (Integer.parseInt(cd) >= 0 && Integer.parseInt(cd) <= 15) {
-                    defensa = Integer.parseInt(cd);
-                }
-            } while (defensa < 0 || defensa > 15);
-            tipo = "Criatura";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
+    //Creamos un metodo para crear los objetos y llamar a editar en la clase conexion.
+    public static void editar(String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
+        Cartas c = null;
+        Conexion cox = new Conexion();
+        if (existe(nombre) == true) {
+            switch (tipo) {
+                case "criatura":
+                    c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
+                case "encantamiento":
+                    c = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
+                case "artefacto":
+                    c = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
+                case "instantaneo":
+                    c = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
+                case "conjuro":
+                    c = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
+                case "tierra":
+                    c = new Tierra(habilidad, nombre, tipo, rareza);
+                    cox.editar(c, nombre);
+                    break;
             }
-        } while (x = false);
-        return carta;
+        }
     }
 
-    public static Encantamiento pedirEncantamiento(File fich) {
-        String nombre = null, color = null, rareza = null, habilidad = null, tipo = null;
-        int cmc = 0;
-        Encantamiento carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre del encantamiento que deseas añadir:");
-            String emana = JOptionPane.showInputDialog("Introduce el coste de mana convertido del encantamiento:");
-            cmc = Integer.parseInt(emana);
-            color = JOptionPane.showInputDialog("Introduce el color o colores del encantamiento:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza del encnatamiento:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del encantamiento:");
-            tipo = "Encantamiento";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
-            }
-        } while (x = false);
-        return carta;
-    }
 
-    public static Instantaneo pedirInstantaneo(File fich) {
-        String nombre, color, rareza, habilidad, tipo;
-        int cmc;
-        Instantaneo carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre del instantaneo que deseas añadir:");
-            String imana = JOptionPane.showInputDialog("Introduce el coste de mana convertido del instantaneo:");
-            cmc = Integer.parseInt(imana);
-            color = JOptionPane.showInputDialog("Introduce el color o colores del instantaneo:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza del instantaneo:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del instantaneo:");
-            tipo = "Instantaneo";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
-            }
-        } while (x = false);
-        return carta;
-    }
-
-    public static Conjuro pedirConjuro(File fich) {
-        String nombre, color, rareza, habilidad, tipo;
-        int cmc;
-        Conjuro carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre del conjuro que deseas añadir:");
-            String comana = JOptionPane.showInputDialog("Introduce el coste de mana convertido del conjuro:");
-            cmc = Integer.parseInt(comana);
-            color = JOptionPane.showInputDialog("Introduce el color o colores del conjuro:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza del conjuro:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del conjuro:");
-            tipo = "Conjuro";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
-            }
-        } while (x = false);
-        return carta;
-    }
-
-    public static Artefacto pedirArtefacto(File fich) {
-        String nombre, color, rareza, habilidad, tipo;
-        int cmc;
-        Artefacto carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre del artefacto que deseas añadir:");
-            String amana = JOptionPane.showInputDialog("Introduce el coste de mana convertido del artefacto:");
-            cmc = Integer.parseInt(amana);
-            color = JOptionPane.showInputDialog("Introduce el color o colores del artefacto:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza del artefacto:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades del artefacto:");
-            tipo = "Artefacto";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
-            }
-        } while (x = false);
-        return carta;
-    }
-
-    public static Tierra pedirTierra(File fich) {
-        String nombre, color, rareza, habilidad, tipo;
-        Tierra carta = null;
-        boolean x = false;
-        do {
-            nombre = JOptionPane.showInputDialog("Introduce el nombre de la tierra que deseas añadir:");
-            rareza = JOptionPane.showInputDialog("Introduce la rareza de la tierra:");
-            habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades de la tierra:");
-            tipo = "Tierra";
-            boolean bol = existe(nombre);
-            if (bol = true) {
-                carta = new Tierra(habilidad, nombre, tipo, rareza);
-                x = true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
-            }
-        } while (x = false);
-        return carta;
-    }
-
+    /*public static Criatura pedirCriatura(File fich) {
+     String nombre = null, color = null, rareza = null, habilidad = null, tipo = null;
+     int cmc = 0, fuerza = -1, defensa = -1;
+     Criatura carta = null;
+     boolean x = false;
+     do {
+     nombre = JOptionPane.showInputDialog("Introduce el nombre de la criatura que deseas añadir:");
+     String cmana = JOptionPane.showInputDialog("Introduce el coste de mana convertido de la criatura:");
+     cmc = Integer.parseInt(cmana);
+     color = JOptionPane.showInputDialog("Introduce el color o colores de la criatura:");
+     rareza = JOptionPane.showInputDialog("Introduce la rareza de la criatura:");
+     habilidad = JOptionPane.showInputDialog("Introduce la habilidad o habilidades de la criatura:");
+     do {
+     String cf = JOptionPane.showInputDialog("Introduce su fuerza:");
+     if (Integer.parseInt(cf) >= 0 && Integer.parseInt(cf) <= 15) {
+     fuerza = Integer.parseInt(cf);
+     }
+     } while (fuerza < 0 || fuerza > 15);
+     do {
+     String cd = JOptionPane.showInputDialog("Introduce su defensa:");
+     if (Integer.parseInt(cd) >= 0 && Integer.parseInt(cd) <= 15) {
+     defensa = Integer.parseInt(cd);
+     }
+     } while (defensa < 0 || defensa > 15);
+     tipo = "Criatura";
+     boolean bol = existe(nombre);
+     if (bol = true) {
+     carta = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
+     x = true;
+     } else {
+     JOptionPane.showMessageDialog(null, "Carta ya existente vuelva a intentarlo");
+     }
+     } while (x = false);
+     return carta;
+     }*/
     //Creamos un metodo que lea un fichero que contenga una serie de cartas.
     public static void leerLista(File fichero) {
         ObjectInputStream fich = null;
@@ -881,34 +741,6 @@ public class Metodos {
                 ficha.close();
             } catch (IOException ex) {
                 System.out.println("erro no peche ");
-            }
-        }
-    }
-
-    public static void crearFicheiro(File ficheiro, File cria, File encan, File inst, File art, File tier, File conj) {
-        //Tierra li = pedirTierra(ficheiro);
-        // String aux = null; // para instanciar un obxecto tipo libro e escribilo no rexistro
-        ObjectOutputStream fich = null;
-
-        try {
-            // abrimos ficheiro para engadir rexistros
-            fich = new ObjectOutputStream(new FileOutputStream(ficheiro));
-            fich = new ObjectOutputStream(new FileOutputStream(cria));
-            fich = new ObjectOutputStream(new FileOutputStream(encan));
-            fich = new ObjectOutputStream(new FileOutputStream(inst));
-            fich = new ObjectOutputStream(new FileOutputStream(art));
-            fich = new ObjectOutputStream(new FileOutputStream(tier));
-            fich = new ObjectOutputStream(new FileOutputStream(conj));
-
-        } catch (IOException ex) {
-            System.out.println("error de escritura " + ex.getMessage());
-        } finally {
-            if (fich != null) {
-                try {
-                    fich.close();
-                } catch (IOException ex) {
-                    System.out.println("erro" + ex.getMessage());
-                }
             }
         }
     }
