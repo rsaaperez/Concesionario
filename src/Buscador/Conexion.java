@@ -54,8 +54,8 @@ public class Conexion {
             switch (tipo) {
                 case "criatura":
                     try {
-                        GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
-                        GetConnection().executeUpdate("INSERT INTO criatura (nombre, cmc, color, fuerza, defensa) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "', '" + c.getFue(c) + "', '" + c.getDef(c) + "')");
+                        GetConnection().executeUpdate("Insert Into cartas Values ('"+c.getNombre()+"', '"+c.getTipo()+ "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
+                        GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");      
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }   break;
