@@ -17,7 +17,7 @@ public class Principal extends javax.swing.JFrame {
     Cartas c;
     Conexion con = new Conexion();
     Metodos met = new Metodos();
-    String nombre = null, color = null, rareza = null, habilidad = null, tipo = null, tipocb, rarezacb;
+    String nombre = null, color = null, rareza = null, habilidad = null, tipo = null,nombreViejo = null;
     int cmc = 0, fuerza = -1, defensa = -1;
 
     /**
@@ -111,7 +111,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         pBuscar = new javax.swing.JPanel();
         bBuscar = new javax.swing.JButton();
-        jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
@@ -121,18 +120,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         cBRareza = new javax.swing.JComboBox();
-        jLabel31 = new javax.swing.JLabel();
-        tBCmc = new javax.swing.JTextField();
-        eBFuerza = new javax.swing.JLabel();
-        cBFuerza = new javax.swing.JComboBox();
-        eBDefensa = new javax.swing.JLabel();
-        cBDefensa = new javax.swing.JComboBox();
-        rBAzul = new javax.swing.JRadioButton();
-        rBRojo = new javax.swing.JRadioButton();
-        rBBlanco = new javax.swing.JRadioButton();
-        rBVerde = new javax.swing.JRadioButton();
-        rBNegro = new javax.swing.JRadioButton();
-        rBIncoloro = new javax.swing.JRadioButton();
         tBhabilidad = new javax.swing.JTextField();
         menu = new javax.swing.JMenuBar();
         mArchivo = new javax.swing.JMenu();
@@ -554,9 +541,19 @@ public class Principal extends javax.swing.JFrame {
         pEditar.setPreferredSize(new java.awt.Dimension(670, 670));
 
         bEditar.setText("Editar");
+        bEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEditarActionPerformed(evt);
+            }
+        });
 
         cEDefensa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una defensa", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
         cEDefensa.setEnabled(false);
+        cEDefensa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cEDefensaActionPerformed(evt);
+            }
+        });
 
         eEDefensa.setText("Defensa:");
         eEDefensa.setEnabled(false);
@@ -566,6 +563,11 @@ public class Principal extends javax.swing.JFrame {
 
         cEFuerza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una fuerza", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
         cEFuerza.setEnabled(false);
+        cEFuerza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cEFuerzaActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("Coste de Mana Convertido:");
 
@@ -583,6 +585,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel18.setText("Rareza:");
 
         cERareza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una rareza", "Comun", "Infrecuente", "Rara", "Rara Mitica" }));
+        cERareza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cERarezaActionPerformed(evt);
+            }
+        });
 
         jLabel19.setText("Habilidad:");
 
@@ -761,8 +768,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel24.setText("Color:");
-
         jLabel25.setText("Tipo:");
 
         jLabel26.setText("Nombre:");
@@ -783,43 +788,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel30.setText("Rareza:");
 
         cBRareza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una rareza", "Comun", "Infrecuente", "Rara", "Rara Mitica" }));
-
-        jLabel31.setText("Coste de Mana Convertido:");
-
-        eBFuerza.setText("Fuerza:");
-        eBFuerza.setEnabled(false);
-
-        cBFuerza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una fuerza", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
-        cBFuerza.setEnabled(false);
-
-        eBDefensa.setText("Defensa:");
-        eBDefensa.setEnabled(false);
-
-        cBDefensa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una defensa", "-1", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15" }));
-        cBDefensa.setEnabled(false);
-
-        rBAzul.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBAzul.setForeground(new java.awt.Color(0, 51, 204));
-        rBAzul.setText("Azul + ");
-
-        rBRojo.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBRojo.setForeground(new java.awt.Color(255, 0, 0));
-        rBRojo.setText("Rojo <");
-
-        rBBlanco.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBBlanco.setForeground(new java.awt.Color(255, 255, 204));
-        rBBlanco.setText("Blanco @");
-
-        rBVerde.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBVerde.setForeground(new java.awt.Color(51, 130, 60));
-        rBVerde.setText("Verde > ");
-
-        rBNegro.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBNegro.setText(" Negro =");
-
-        rBIncoloro.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
-        rBIncoloro.setForeground(new java.awt.Color(102, 102, 102));
-        rBIncoloro.setText("Incoloro");
+        cBRareza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cBRarezaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pBuscarLayout = new javax.swing.GroupLayout(pBuscar);
         pBuscar.setLayout(pBuscarLayout);
@@ -830,48 +803,20 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pBuscarLayout.createSequentialGroup()
                         .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pBuscarLayout.createSequentialGroup()
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel26)
-                                    .addComponent(jLabel25))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel24)
-                            .addGroup(pBuscarLayout.createSequentialGroup()
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rBBlanco)
-                                    .addComponent(rBNegro)
-                                    .addComponent(rBAzul))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(rBRojo)
-                                    .addComponent(rBIncoloro)
-                                    .addComponent(rBVerde))))
+                            .addComponent(jLabel26)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pBuscarLayout.createSequentialGroup()
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(eBFuerza)
-                                    .addComponent(eBDefensa))
-                                .addGap(23, 23, 23)
-                                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cBDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cBFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pBuscarLayout.createSequentialGroup()
-                                    .addComponent(jLabel31)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tBCmc, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pBuscarLayout.createSequentialGroup()
-                                    .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel29)
-                                        .addComponent(jLabel30))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(tBhabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cBRareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel30))
+                        .addGap(18, 18, 18)
+                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tBhabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cBRareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 192, Short.MAX_VALUE))
                     .addGroup(pBuscarLayout.createSequentialGroup()
                         .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -899,37 +844,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel30)
                     .addComponent(cBRareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel31)
-                    .addComponent(tBCmc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pBuscarLayout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(eBFuerza)
-                            .addComponent(cBFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(eBDefensa)
-                            .addComponent(cBDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pBuscarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rBAzul)
-                            .addComponent(rBRojo))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rBBlanco)
-                            .addComponent(rBVerde))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rBNegro)
-                            .addComponent(rBIncoloro))))
-                .addGap(34, 34, 34)
+                .addGap(54, 54, 54)
                 .addComponent(bBuscar)
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         paneles.addTab("Buscar carta", pBuscar);
@@ -997,52 +914,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void cARarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cARarezaActionPerformed
         if (cARareza.getSelectedIndex() == 1) {
-            rarezacb = "comun";
+            rareza = "comun";
         } else if (cARareza.getSelectedIndex() == 2) {
-            rarezacb = "infrecuente";
+            rareza = "infrecuente";
         } else if (cARareza.getSelectedIndex() == 3) {
-            rarezacb = "rara";
+            rareza = "rara";
         } else if (cARareza.getSelectedIndex() == 4) {
-            rarezacb = "mitica";
+            rareza = "mitica";
         }
     }//GEN-LAST:event_cARarezaActionPerformed
 
     private void cBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBTipoActionPerformed
-        if (cBTipo.getSelectedIndex() == 0) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
-        } else if (cBTipo.getSelectedIndex() == 1) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
+        if (cBTipo.getSelectedIndex() == 1) {
+             tipo = "artefacto";
         } else if (cBTipo.getSelectedIndex() == 2) {
-            eBFuerza.setEnabled(true);
-            cBFuerza.setEnabled(true);
-            eBDefensa.setEnabled(true);
-            cBDefensa.setEnabled(true);
+            tipo = "criatura";
         } else if (cBTipo.getSelectedIndex() == 3) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
+            tipo = "conjuro";
         } else if (cBTipo.getSelectedIndex() == 4) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
+            tipo = "encantamiento";
         } else if (cBTipo.getSelectedIndex() == 5) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
+            tipo = "instantaneo";
         } else if (cBTipo.getSelectedIndex() == 6) {
-            eBFuerza.setEnabled(false);
-            cBFuerza.setEnabled(false);
-            eBDefensa.setEnabled(false);
-            cBDefensa.setEnabled(false);
+            tipo = "tierra";
         }
     }//GEN-LAST:event_cBTipoActionPerformed
 
@@ -1057,31 +951,37 @@ public class Principal extends javax.swing.JFrame {
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            tipo = "artefacto";
         } else if (cETipo.getSelectedIndex() == 2) {
             eEFuerza.setEnabled(true);
             cEFuerza.setEnabled(true);
             eEDefensa.setEnabled(true);
             cEDefensa.setEnabled(true);
+            tipo = "criatura";
         } else if (cETipo.getSelectedIndex() == 3) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            tipo = "conjuro";
         } else if (cETipo.getSelectedIndex() == 4) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            tipo = "encantamiento";
         } else if (cETipo.getSelectedIndex() == 5) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            tipo = "instantaneo";
         } else if (cETipo.getSelectedIndex() == 6) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            tipo = "tierra";
         }
     }//GEN-LAST:event_cETipoActionPerformed
 
@@ -1096,37 +996,37 @@ public class Principal extends javax.swing.JFrame {
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipocb = "artefacto";
+            tipo = "artefacto";
         } else if (cATipo.getSelectedIndex() == 2) {
             eAFuerza.setEnabled(true);
             cAFuerza.setEnabled(true);
             eADefensa.setEnabled(true);
             cADefensa.setEnabled(true);
-            tipocb = "criatura";
+            tipo = "criatura";
         } else if (cATipo.getSelectedIndex() == 3) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipocb = "conjuro";
+            tipo = "conjuro";
         } else if (cATipo.getSelectedIndex() == 4) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipocb = "encantamiento";
+            tipo = "encantamiento";
         } else if (cATipo.getSelectedIndex() == 5) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipocb = "instantaneo";
+            tipo = "instantaneo";
         } else if (cATipo.getSelectedIndex() == 6) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipocb = "tierra";
+            tipo = "tierra";
         }
     }//GEN-LAST:event_cATipoActionPerformed
 
@@ -1137,8 +1037,6 @@ public class Principal extends javax.swing.JFrame {
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
         nombre = tANombre.getText();
         habilidad = tAhabilidad.getText();
-        tipo = tipocb;
-        rareza = rarezacb;
         cmc =Integer.parseInt(tACmc.getText());
         Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
     }//GEN-LAST:event_bAñadirActionPerformed
@@ -1301,6 +1199,114 @@ public class Principal extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_cENombreActionPerformed
 
+    private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
+        nombre = tENombre.getText();
+        habilidad = tEhabilidad.getText();
+        cmc =Integer.parseInt(tECmc.getText());
+        nombreViejo = cENombre.getSelectedItem().toString();
+        Metodos.editar(nombreViejo,nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+    }//GEN-LAST:event_bEditarActionPerformed
+
+    private void cERarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cERarezaActionPerformed
+        if (cERareza.getSelectedIndex() == 1) {
+            rareza = "comun";
+        } else if (cERareza.getSelectedIndex() == 2) {
+            rareza = "infrecuente";
+        } else if (cERareza.getSelectedIndex() == 3) {
+            rareza = "rara";
+        } else if (cERareza.getSelectedIndex() == 4) {
+            rareza = "mitica";
+        }
+    }//GEN-LAST:event_cERarezaActionPerformed
+
+    private void cEFuerzaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEFuerzaActionPerformed
+        if (cEFuerza.getSelectedIndex() == 1) {
+            fuerza = -1;
+        } else if (cEFuerza.getSelectedIndex() == 2) {
+            fuerza = 0;
+        } else if (cEFuerza.getSelectedIndex() == 3) {
+            fuerza = 1;
+        } else if (cEFuerza.getSelectedIndex() == 4) {
+            fuerza = 2;
+        } else if (cEFuerza.getSelectedIndex() == 5) {
+            fuerza = 3;
+        } else if (cEFuerza.getSelectedIndex() == 6) {
+            fuerza = 4;
+        } else if (cEFuerza.getSelectedIndex() == 7) {
+            fuerza = 5;
+        } else if (cEFuerza.getSelectedIndex() == 8) {
+            fuerza = 6;
+        } else if (cEFuerza.getSelectedIndex() == 9) {
+            fuerza = 7;
+        } else if (cEFuerza.getSelectedIndex() == 10) {
+            fuerza = 8;
+        } else if (cEFuerza.getSelectedIndex() == 11) {
+            fuerza = 9;
+        } else if (cEFuerza.getSelectedIndex() == 12) {
+            fuerza = 10;
+        } else if (cEFuerza.getSelectedIndex() == 13) {
+            fuerza = 11;
+        } else if (cEFuerza.getSelectedIndex() == 14) {
+            fuerza = 12;
+        } else if (cEFuerza.getSelectedIndex() == 15) {
+            fuerza = 13;
+        } else if (cEFuerza.getSelectedIndex() == 16) {
+            fuerza = 14;
+        } else if (cEFuerza.getSelectedIndex() == 17) {
+            fuerza = 15;
+        }
+    }//GEN-LAST:event_cEFuerzaActionPerformed
+
+    private void cEDefensaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cEDefensaActionPerformed
+        if (cEDefensa.getSelectedIndex() == 1) {
+            defensa = -1;
+        } else if (cEDefensa.getSelectedIndex() == 2) {
+            defensa = 0;
+        } else if (cEDefensa.getSelectedIndex() == 3) {
+            defensa = 1;
+        } else if (cEDefensa.getSelectedIndex() == 4) {
+            defensa = 2;
+        } else if (cEDefensa.getSelectedIndex() == 5) {
+            defensa = 3;
+        } else if (cEDefensa.getSelectedIndex() == 6) {
+            defensa = 4;
+        } else if (cEDefensa.getSelectedIndex() == 7) {
+            defensa = 5;
+        } else if (cEDefensa.getSelectedIndex() == 8) {
+            defensa = 6;
+        } else if (cEDefensa.getSelectedIndex() == 9) {
+            defensa = 7;
+        } else if (cEDefensa.getSelectedIndex() == 10) {
+            defensa = 8;
+        } else if (cEDefensa.getSelectedIndex() == 11) {
+            defensa = 9;
+        } else if (cEDefensa.getSelectedIndex() == 12) {
+            defensa = 10;
+        } else if (cEDefensa.getSelectedIndex() == 13) {
+            defensa = 11;
+        } else if (cEDefensa.getSelectedIndex() == 14) {
+            defensa = 12;
+        } else if (cEDefensa.getSelectedIndex() == 15) {
+            defensa = 13;
+        } else if (cEDefensa.getSelectedIndex() == 16) {
+            defensa = 14;
+        } else if (cEDefensa.getSelectedIndex() == 17) {
+            defensa = 15;
+        }
+    }//GEN-LAST:event_cEDefensaActionPerformed
+
+    private void cBRarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBRarezaActionPerformed
+        if (cBRareza.getSelectedIndex() == 1) {
+            rareza = "comun";
+        } else if (cBRareza.getSelectedIndex() == 2) {
+            rareza = "infrecuente";
+        } else if (cBRareza.getSelectedIndex() == 3) {
+            rareza = "rara";
+        } else if (cBRareza.getSelectedIndex() == 4) {
+            rareza = "mitica";
+        }
+    }//GEN-LAST:event_cBRarezaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1345,8 +1351,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox cAFuerza;
     private javax.swing.JComboBox cARareza;
     private javax.swing.JComboBox cATipo;
-    private javax.swing.JComboBox cBDefensa;
-    private javax.swing.JComboBox cBFuerza;
     private javax.swing.JComboBox cBRareza;
     private javax.swing.JComboBox cBTipo;
     private javax.swing.JComboBox cEDefensa;
@@ -1356,8 +1360,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox cETipo;
     private javax.swing.JLabel eADefensa;
     private javax.swing.JLabel eAFuerza;
-    private javax.swing.JLabel eBDefensa;
-    private javax.swing.JLabel eBFuerza;
     private javax.swing.JLabel eEDefensa;
     private javax.swing.JLabel eEFuerza;
     private javax.swing.JLabel jLabel1;
@@ -1375,7 +1377,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
@@ -1383,7 +1384,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
@@ -1415,12 +1415,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton rANegro;
     private javax.swing.JRadioButton rARojo;
     private javax.swing.JRadioButton rAVerde;
-    private javax.swing.JRadioButton rBAzul;
-    private javax.swing.JRadioButton rBBlanco;
-    private javax.swing.JRadioButton rBIncoloro;
-    private javax.swing.JRadioButton rBNegro;
-    private javax.swing.JRadioButton rBRojo;
-    private javax.swing.JRadioButton rBVerde;
     private javax.swing.JRadioButton rEAzul;
     private javax.swing.JRadioButton rEBlanco;
     private javax.swing.JRadioButton rEIncoloro;
@@ -1431,7 +1425,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tANombre;
     private javax.swing.JTextField tAhabilidad;
     private javax.swing.JTextField tAimagen;
-    private javax.swing.JTextField tBCmc;
     private javax.swing.JTextField tBNombre;
     private javax.swing.JTextField tBhabilidad;
     private javax.swing.JTextField tECmc;

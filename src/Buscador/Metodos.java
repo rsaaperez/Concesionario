@@ -72,34 +72,34 @@ public class Metodos {
     }
 
     //Creamos un metodo para crear los objetos y llamar a editar en la clase conexion.
-    public static void editar(String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
+    public static void editar(String nombreViejo, String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
         Cartas c = null;
         Conexion cox = new Conexion();
         if (existe(nombre) == true) {
             switch (tipo) {
                 case "criatura":
                     c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
                 case "encantamiento":
                     c = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
                 case "artefacto":
                     c = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
                 case "instantaneo":
                     c = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
                 case "conjuro":
                     c = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
                 case "tierra":
                     c = new Tierra(habilidad, nombre, tipo, rareza);
-                    cox.editar(c, nombre);
+                    cox.editar(c, nombreViejo);
                     break;
             }
         }
