@@ -594,6 +594,12 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel23.setText("Indica la carta a editar:");
 
+        cENombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cENombreActionPerformed(evt);
+            }
+        });
+
         rEAzul.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rEAzul.setForeground(new java.awt.Color(0, 51, 204));
         rEAzul.setText(" Azul +");
@@ -1283,6 +1289,17 @@ public class Principal extends javax.swing.JFrame {
             defensa = 15;
         }
     }//GEN-LAST:event_cADefensaActionPerformed
+
+    private void cENombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cENombreActionPerformed
+        // TODO add your handling code here:
+        Cartas aux[][] = null;
+        aux = (Cartas[][]) con.seleccionarLista();
+         for (int i = 0; i < aux.length; i++) {
+                for (int j = 0; j < aux[i].length; j++) {
+                    cENombre.setSelectedItem(aux[i][j].getNombre());
+                }
+            }
+    }//GEN-LAST:event_cENombreActionPerformed
 
     /**
      * @param args the command line arguments
