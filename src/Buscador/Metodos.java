@@ -105,7 +105,7 @@ public class Metodos {
         }
     }
 
- public static void buscar(String nombre, String tipo, String rareza, String habilidad) {
+    public static void buscar(String nombre, String tipo, String rareza, String habilidad) {
         Cartas c = null;
         Conexion cox = new Conexion();
         Cartas aux[][] = null;
@@ -116,17 +116,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-                                        
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -137,17 +137,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -158,17 +158,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -179,17 +179,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -200,17 +200,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -221,17 +221,17 @@ public class Metodos {
                     for (int i = 0; i < aux.length; i++) {
                         for (int j = 0; j < aux[i].length; j++) {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == "") {
-                                    if (habilidad == "") {
-
+                                if (rareza == aux[i][j].getRareza()) {
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 } else {
-                                    if (habilidad == "") {
-
+                                    if (habilidad == aux[i][j].getHabilidad()) {
+                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     } else {
-
+                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
                                     }
                                 }
                             }
@@ -242,5 +242,4 @@ public class Metodos {
         }
     }
 
-    
 }
