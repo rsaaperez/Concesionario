@@ -8,7 +8,8 @@ package Objetos;
  *
  * @author mperezsilva
  */
-public class Encantamiento extends Cartas{
+public class Encantamiento extends Cartas {
+
     private int cmc;
     private String color;
 
@@ -36,10 +37,12 @@ public class Encantamiento extends Cartas{
     public void setColor(String color) {
         this.color = color;
     }
-    public int getCoste(Cartas c){
+
+    public int getCoste(Cartas c) {
         return cmc;
     }
-    public String getCol(Cartas c){
+
+    public String getCol(Cartas c) {
         return color;
     }
 

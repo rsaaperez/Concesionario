@@ -4,7 +4,7 @@
  */
 package Buscador;
 
-import Objetos.Cartas;
+import Objetos.*;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.ResultSet;
 import com.mysql.jdbc.ResultSetMetaData;
@@ -54,39 +54,44 @@ public class Conexion {
             switch (tipo) {
                 case "criatura":
                     try {
-                        GetConnection().executeUpdate("Insert Into cartas Values ('"+c.getNombre()+"', '"+c.getTipo()+ "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
-                        GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");      
+                        GetConnection().executeUpdate("Insert Into cartas Values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
+                        GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "artefacto":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO artefacto (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "conjuro":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO conjuro (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "encantamiento":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO encantamento (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "instantaneo":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO Instantaneo (nombre, cmc, color) values ('" + c.getNombre() + "', '" + c.getCoste(c) + "', '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "tierra":
                     GetConnection().executeUpdate("INSERT INTO cartas (nombre, tipo, rareza. habilidad) VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                     GetConnection().executeUpdate("INSERT INTO Tierra (nombre) VALUES ('" + c.getNombre() + "')");
@@ -99,16 +104,13 @@ public class Conexion {
 
     public Object[][] seleccionarLista() {
         ResultSet rs = null;
-        //Array
         try {
             Statement st = (Statement) conexion.createStatement();
             rs = (ResultSet) st.executeQuery("SELECT * FROM cartas");
-            //boolean r = rs.next();
             st.close();
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            //return rs;
             return ResultSetToArray(rs);
         }
     }
@@ -144,35 +146,40 @@ public class Conexion {
                         GetConnection().executeUpdate("UPDATE INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ") WHERE nombre='" + nom + "'");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "artefacto":
                     try {
                         GetConnection().executeUpdate("UPDATE INTO carta values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "')");
                         GetConnection().executeUpdate("UPDATE INTO artefacto values ('" + c.getNombre() + "'," + c.getCoste(c) + ", '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "conjuro":
                     try {
                         GetConnection().executeUpdate("UPDATE INTO carta values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "')");
                         GetConnection().executeUpdate("UPDATE INTO conjuro values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "encantamiento":
                     try {
                         GetConnection().executeUpdate("UPDATE INTO carta values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "')");
                         GetConnection().executeUpdate("UPDATE INTO encantamento values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "') WHERE nombre='" + nom + "'");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "instantaneo":
                     try {
                         GetConnection().executeUpdate("UPDATE INTO carta values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "')");
                         GetConnection().executeUpdate("UPDATE INTO Instantaneo values ('" + c.getNombre() + "'," + c.getCoste(c) + ", '" + c.getCol(c) + "' WHERE nombre='" + nom + "')");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-                    }   break;
+                    }
+                    break;
                 case "tierra":
                     GetConnection().executeUpdate("UPDATE INTO carta values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "') WHERE nombre='" + nom + "')");
                     GetConnection().executeUpdate("UPDATE INTO Tierra VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "' ) WHERE nombre='" + nom + "'");
@@ -180,6 +187,71 @@ public class Conexion {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public ResultSet seleccionarCria(String nom) {
+        ResultSet rs = null;
+        try {
+            Statement st = (Statement) conexion.createStatement();
+            rs = (ResultSet) st.executeQuery("SELECT * FROM criatura where nombre = '"+nom+"'");
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return rs;
+        }
+    }
+
+    public ResultSet seleccionarEncan(String nom) {
+        ResultSet rs = null;
+        try {
+            Statement st = (Statement) conexion.createStatement();
+            rs = (ResultSet) st.executeQuery("SELECT * FROM encantamiento where nombre = '"+nom+"'");
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return rs;
+        }
+    }
+
+    public ResultSet seleccionarArte(String nom) {
+        ResultSet rs = null;
+        try {
+            Statement st = (Statement) conexion.createStatement();
+            rs = (ResultSet) st.executeQuery("SELECT * FROM artefacto where nombre = '"+nom+"'");
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return rs;
+        }
+    }
+
+    public ResultSet seleccionarConj(String nom) {
+        ResultSet rs = null;
+        try {
+            Statement st = (Statement) conexion.createStatement();
+            rs = (ResultSet) st.executeQuery("SELECT * FROM conjuro where nombre = '"+nom+"'");
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return rs;
+        }
+    }
+
+    public ResultSet seleccionarInst(String nom) {
+        ResultSet rs = null;
+        try {
+            Statement st = (Statement) conexion.createStatement();
+            rs = (ResultSet) st.executeQuery("SELECT * FROM instantaneo where nombre = '"+nom+"'");
+            st.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            return rs;
         }
     }
 }

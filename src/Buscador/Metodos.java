@@ -6,6 +6,8 @@ package Buscador;
 
 import Objetos.*;
 import java.io.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -105,10 +107,11 @@ public class Metodos {
         }
     }
 
-    public static void buscar(String nombre, String tipo, String rareza, String habilidad) {
+    public static Cartas buscar(String nombre, String tipo, String rareza, String habilidad) {
         Cartas c = null;
         Conexion cox = new Conexion();
         Cartas aux[][] = null;
+        ResultSet s = null;
         if (existe(nombre) == true) {
             aux = (Cartas[][]) cox.seleccionarLista();
             switch (tipo) {
@@ -118,15 +121,43 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarCria(nombre);
+                                            try {
+                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarCria(nombre);
+                                            try {
+                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarCria(nombre);
+                                            try {
+                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Criatura(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getFue(c), aux[i][j].getDef(c), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarCria(nombre);
+                                            try {
+                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -139,15 +170,43 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarEncan(nombre);
+                                            try {
+                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarEncan(nombre);
+                                            try {
+                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarEncan(nombre);
+                                            try {
+                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Encantamiento(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarEncan(nombre);
+                                            try {
+                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -160,15 +219,43 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarArte(nombre);
+                                            try {
+                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarArte(nombre);
+                                            try {
+                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarArte(nombre);
+                                            try {
+                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Artefacto(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarArte(nombre);
+                                            try {
+                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -181,15 +268,43 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarInst(nombre);
+                                            try {
+                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarInst(nombre);
+                                            try {
+                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarInst(nombre);
+                                            try {
+                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Instantaneo(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarInst(nombre);
+                                            try {
+                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -202,15 +317,43 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarConj(nombre);
+                                            try {
+                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarConj(nombre);
+                                            try {
+                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarConj(nombre);
+                                            try {
+                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     } else {
-                                        c = new Conjuro(aux[i][j].getCoste(c), aux[i][j].getCol(c), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            s = cox.seleccionarConj(nombre);
+                                            try {
+                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                            } catch (SQLException ex) {
+                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -223,15 +366,23 @@ public class Metodos {
                             if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
                                 if (rareza == aux[i][j].getRareza()) {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        }
                                     } else {
-                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        }
                                     }
                                 } else {
                                     if (habilidad == aux[i][j].getHabilidad()) {
-                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        }
                                     } else {
-                                        c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        if (nombre == aux[i][j].getNombre()) {
+                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
+                                        }
                                     }
                                 }
                             }
@@ -240,6 +391,7 @@ public class Metodos {
                     break;
             }
         }
+        return c;
     }
 
 }
