@@ -1043,7 +1043,12 @@ public class Principal extends javax.swing.JFrame {
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
         DefaultTableModel md = (DefaultTableModel) tabla.getModel();
-
+        Cartas aux[][] = (Cartas[][]) con.seleccionarLista();
+         for (int i = 0; i < aux.length; i++) {
+                for (int j = 0; j < aux[i].length; j++) {
+                    
+                }
+            }
     }//GEN-LAST:event_bVisualizarActionPerformed
 
     private void rAAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAAzulActionPerformed
