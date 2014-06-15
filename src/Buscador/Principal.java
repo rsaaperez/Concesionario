@@ -71,7 +71,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         cATipo = new javax.swing.JComboBox();
         cARareza = new javax.swing.JComboBox();
-        jLabel10 = new javax.swing.JLabel();
+        eACmc = new javax.swing.JLabel();
         tACmc = new javax.swing.JTextField();
         eAFuerza = new javax.swing.JLabel();
         eADefensa = new javax.swing.JLabel();
@@ -88,7 +88,7 @@ public class Principal extends javax.swing.JFrame {
         eEDefensa = new javax.swing.JLabel();
         eEFuerza = new javax.swing.JLabel();
         cEFuerza = new javax.swing.JComboBox();
-        jLabel15 = new javax.swing.JLabel();
+        eECmc = new javax.swing.JLabel();
         tECmc = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
@@ -368,7 +368,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Coste de Mana Convertido:");
+        eACmc.setText("Coste de Mana Convertido:");
+
+        tACmc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tACmcActionPerformed(evt);
+            }
+        });
 
         eAFuerza.setText("Fuerza:");
         eAFuerza.setEnabled(false);
@@ -462,7 +468,7 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(cAFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAñadirLayout.createSequentialGroup()
-                                            .addComponent(jLabel10)
+                                            .addComponent(eACmc)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(tACmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAñadirLayout.createSequentialGroup()
@@ -517,7 +523,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(cARareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(21, 21, 21)
                         .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
+                            .addComponent(eACmc)
                             .addGroup(pAñadirLayout.createSequentialGroup()
                                 .addComponent(tACmc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -571,7 +577,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel15.setText("Coste de Mana Convertido:");
+        eECmc.setText("Coste de Mana Convertido:");
 
         jLabel16.setText("Color:");
 
@@ -678,7 +684,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addComponent(cEFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pEditarLayout.createSequentialGroup()
-                                    .addComponent(jLabel15)
+                                    .addComponent(eECmc)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pEditarLayout.createSequentialGroup()
@@ -724,7 +730,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jLabel15)
+                    .addComponent(eECmc)
                     .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pEditarLayout.createSequentialGroup()
@@ -948,6 +954,8 @@ public class Principal extends javax.swing.JFrame {
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            eECmc.setEnabled(false);
+            tECmc.setEnabled(false);
         } else if (cETipo.getSelectedIndex() == 1) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
@@ -983,6 +991,8 @@ public class Principal extends javax.swing.JFrame {
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
+            eACmc.setEnabled(false);
+            tACmc.setEnabled(false);
             tipo = "tierra";
         }
     }//GEN-LAST:event_cETipoActionPerformed
@@ -993,6 +1003,8 @@ public class Principal extends javax.swing.JFrame {
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
+            eACmc.setEnabled(false);
+            tACmc.setEnabled(false);
         } else if (cATipo.getSelectedIndex() == 1) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
@@ -1028,6 +1040,8 @@ public class Principal extends javax.swing.JFrame {
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
+            eACmc.setEnabled(false);
+            tACmc.setEnabled(false);
             tipo = "tierra";
         }
     }//GEN-LAST:event_cATipoActionPerformed
@@ -1039,7 +1053,11 @@ public class Principal extends javax.swing.JFrame {
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
         nombre = tANombre.getText();
         habilidad = tAhabilidad.getText();
-        cmc =Integer.parseInt(tACmc.getText());
+        if (tACmc.isEnabled()){
+          cmc =Integer.parseInt(tACmc.getText());  
+        }else{
+            cmc=0;
+        }
         Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
         this.cENombre.setModel( con.LlenarComboBox());
     }//GEN-LAST:event_bAñadirActionPerformed
@@ -1215,9 +1233,13 @@ public class Principal extends javax.swing.JFrame {
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
         nombre = tENombre.getText();
         habilidad = tEhabilidad.getText();
-        cmc =Integer.parseInt(tECmc.getText());
+        if (tECmc.isEnabled()){
+          cmc =Integer.parseInt(tECmc.getText());  
+        }else{
+            cmc=0;
+        }
         nombreViejo = cENombre.getSelectedItem().toString();
-        Metodos.editar(nombreViejo,nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+        Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
         this.cENombre.setModel( con.LlenarComboBox());
     }//GEN-LAST:event_bEditarActionPerformed
 
@@ -1321,6 +1343,10 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cBRarezaActionPerformed
 
+    private void tACmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tACmcActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tACmcActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1372,16 +1398,16 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox cENombre;
     private javax.swing.JComboBox cERareza;
     private javax.swing.JComboBox cETipo;
+    private javax.swing.JLabel eACmc;
     private javax.swing.JLabel eADefensa;
     private javax.swing.JLabel eAFuerza;
+    private javax.swing.JLabel eECmc;
     private javax.swing.JLabel eEDefensa;
     private javax.swing.JLabel eEFuerza;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;

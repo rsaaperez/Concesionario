@@ -5,10 +5,6 @@
 package Buscador;
 
 import Objetos.*;
-import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -75,7 +71,7 @@ public class Metodos {
     public static void editar(String nombreViejo, String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
         Cartas c = null;
         Conexion cox = new Conexion();
-        if (existe(nombre) == true) {
+        //if (existe(nombreViejo) == true) {
             switch (tipo) {
                 case "criatura":
                     c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
@@ -102,7 +98,7 @@ public class Metodos {
                     cox.editar(c, nombreViejo);
                     break;
             }
-        }
+        //}
     }
 
     public static void buscar(String nombre, String tipo, String rareza, String habilidad) {
