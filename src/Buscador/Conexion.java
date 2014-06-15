@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -103,6 +104,26 @@ public class Conexion {
             System.out.println(e);
         }
         return data;
+    }
+    public DefaultComboBoxModel LlenarComboBox()
+    {
+        DefaultComboBoxModel  listmodel = null;
+        try {
+            listmodel = new DefaultComboBoxModel ();
+            PreparedStatement pstm = conexion.prepareStatement( " SELECT * FROM cartas " );
+            java.sql.ResultSet res = pstm.executeQuery();
+            try {
+                while( res.next() ){
+                    listmodel.addElement( res.getString( "nombre" ) );
+                }
+                res.close();
+            } catch (SQLException ex) {
+                System.err.println( "Error consulta :" + ex.getMessage() );
+            }
+        } catch (SQLException ex) {            
+            Logger.getLogger(Conexion.class.getName()).log( Level.SEVERE, null, ex);
+        }        
+       return listmodel;
     }
 
     public void insertar(Cartas c) {
