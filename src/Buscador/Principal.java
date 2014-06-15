@@ -1041,6 +1041,7 @@ public class Principal extends javax.swing.JFrame {
         habilidad = tAhabilidad.getText();
         cmc =Integer.parseInt(tACmc.getText());
         Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+        this.cENombre.setModel( con.LlenarComboBox());
     }//GEN-LAST:event_bAñadirActionPerformed
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
@@ -1217,6 +1218,7 @@ public class Principal extends javax.swing.JFrame {
         cmc =Integer.parseInt(tECmc.getText());
         nombreViejo = cENombre.getSelectedItem().toString();
         Metodos.editar(nombreViejo,nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+        this.cENombre.setModel( con.LlenarComboBox());
     }//GEN-LAST:event_bEditarActionPerformed
 
     private void cERarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cERarezaActionPerformed
