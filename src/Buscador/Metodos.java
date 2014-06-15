@@ -80,7 +80,7 @@ public class Metodos {
     public static void editar(String nombreViejo, String nombre, String tipo, String rareza, String habilidad, int cmc, String color, int fuerza, int defensa) {
         Cartas c = null;
         Conexion cox = new Conexion();
-        if (existe(nombreViejo) == true) {
+        if (existe(nombreViejo) == false) {
             switch (tipo) {
                 case "criatura":
                     c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
