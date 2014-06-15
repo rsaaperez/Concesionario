@@ -14,11 +14,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame {
 
-    Cartas c;
-    Conexion con = new Conexion();
-    Metodos met = new Metodos();
-    String nombre = null, color = null, rareza = null, habilidad = null, tipo = null,nombreViejo = null;
-    int cmc = 0, fuerza = -1, defensa = -1;
+    private Cartas c;
+    private Conexion con = new Conexion();
+    private Metodos met = new Metodos();
+    private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null,nombreViejo = null;
+    private int cmc = 0, fuerza = -1, defensa = -1;
+    private Object[][] dtCartas;
+    private void Actualizar_Tabla(){
+        //actualiza los datos de la tabla realizando una consulta a la base de datos
+        String[] columNames = {"Nombre" ,"Tipo","Rareza","Habilidad"};
+        dtCartas = con.Select_Cartas();
+        // se colocan los datos en la tabla
+        DefaultTableModel datos = new DefaultTableModel(dtCartas,columNames);
+        tabla.setModel(datos);
+    }
 
     /**
      * Creates new form Principal
@@ -1042,13 +1051,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_bAñadirActionPerformed
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
-        DefaultTableModel md = (DefaultTableModel) tabla.getModel();
-        Cartas aux[][] = (Cartas[][]) con.seleccionarLista();
-         for (int i = 0; i < aux.length; i++) {
-                for (int j = 0; j < aux[i].length; j++) {
-                    
-                }
-            }
+        Actualizar_Tabla();
     }//GEN-LAST:event_bVisualizarActionPerformed
 
     private void rAAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAAzulActionPerformed
@@ -1195,8 +1198,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void cENombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cENombreActionPerformed
         // TODO add your handling code here:
-        Cartas aux[][] = null;
-        aux = (Cartas[][]) con.seleccionarLista();
+        Cartas aux[][] = (Cartas[][]) con.seleccionarLista();
          for (int i = 0; i < aux.length; i++) {
                 for (int j = 0; j < aux[i].length; j++) {
                     cENombre.setSelectedItem(aux[i][j].getNombre());
