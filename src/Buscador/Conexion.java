@@ -398,7 +398,7 @@ public class Conexion {
     }
 
     public Object[][] SelectTie(String nom) {
-        String consulta = "Select nombre,tipo,rareza,habilidad FROM tierra where nombre='"+nom+"'";
+        String consulta = "Select nombre,tipo,rareza,habilidad FROM cartas where nombre='"+nom+"'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][4];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
