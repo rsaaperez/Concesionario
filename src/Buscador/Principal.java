@@ -227,7 +227,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel31)
                     .addComponent(bDefensa)
                     .addComponent(bFuerza))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         vAñadir.setMinimumSize(new java.awt.Dimension(357, 100));
@@ -308,6 +308,7 @@ public class Principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BuscadorMTG");
+        setIconImage(getIconImage());
         setMinimumSize(new java.awt.Dimension(680, 525));
         setPreferredSize(new java.awt.Dimension(680, 525));
         setResizable(false);
