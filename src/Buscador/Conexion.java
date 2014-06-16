@@ -130,7 +130,7 @@ public class Conexion {
         String tipo = c.getTipo();
         try {
             switch (tipo) {
-                case "criatura":
+                case "Criatura":
                     try {
                         GetConnection().executeUpdate("Insert Into cartas Values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");
@@ -138,7 +138,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "artefacto":
+                case "Artefacto":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO artefacto values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
@@ -146,7 +146,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "conjuro":
+                case "Conjuro":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO conjuro  values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
@@ -154,7 +154,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "encantamiento":
+                case "Encantamiento":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO encantamiento values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
@@ -162,7 +162,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "instantaneo":
+                case "Instantaneo":
                     try {
                         GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                         GetConnection().executeUpdate("INSERT INTO Instantaneo values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
@@ -170,7 +170,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "tierra":
+                case "Tierra":
                     GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                     GetConnection().executeUpdate("INSERT INTO Tierra VALUES ('" + c.getNombre() + "')");
                     break;
@@ -218,7 +218,7 @@ public class Conexion {
         String tipo = c.getTipo();
         try {
             switch (tipo) {
-                case "criatura":
+                case "Criatura":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE criatura set nombre='" + c.getNombre() + "', cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "', fuerza=" + c.getFue(c) + ", defensa=" + c.getDef(c) + " WHERE nombre='" + nom + "'");
@@ -226,7 +226,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "artefacto":
+                case "Artefacto":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE artefacto set nombre='" + c.getNombre() + "',cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "' WHERE nombre='" + nom + "'");
@@ -234,7 +234,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "conjuro":
+                case "Conjuro":
                     try {
                        GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE conjuro set nombre='" + c.getNombre() + "',cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "' WHERE nombre='" + nom + "'");
@@ -242,7 +242,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "encantamiento":
+                case "Encantamiento":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE encantamiento set nombre='" + c.getNombre() + "',cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "' WHERE nombre='" + nom + "'");
@@ -250,7 +250,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "instantaneo":
+                case "Instantaneo":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE instantaneo set nombre='" + c.getNombre() + "',cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "' WHERE nombre='" + nom + "'");
@@ -258,7 +258,7 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
-                case "tierra":
+                case "Tierra":
                     GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE tierra set nombre='" + c.getNombre() + "' WHERE nombre='" + nom + "'");
                     break;
@@ -267,69 +267,154 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    public ResultSet seleccionarCria(String nom) {
-        ResultSet rs = null;
+    public ResultSet seleccionarCarta(String nom) {
+        java.sql.ResultSet res = null;
         try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM criatura where nombre = '"+nom+"'");
-            st.close();
+            PreparedStatement pstm = conexion.prepareStatement( " SELECT * FROM cartas where nombre = '"+nom+"' " );
+            res = (ResultSet) pstm.executeQuery();
+            res.close();
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            return rs;
+            return (ResultSet) res;
+            
         }
     }
-
-    public ResultSet seleccionarEncan(String nom) {
-        ResultSet rs = null;
+    public Object[][] SelectIns(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,instantaneo.cmc,instantaneo.color FROM cartas,instantaneo where cartas.nombre='"+nom+"' and instantaneo.nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][6];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
         try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM encantamiento where nombre = '"+nom+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return rs;
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
+        return data;
     }
 
-    public ResultSet seleccionarArte(String nom) {
-        ResultSet rs = null;
+    public Object[][] SelectCria(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,criatura.cmc,criatura.color, criatura.fuerza, criatura.defensa FROM cartas,criatura where cartas.nombre='"+nom+"' and criatura.nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][8];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
         try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM artefacto where nombre = '"+nom+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return rs;
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+                data[0][6] = res.getString("fuerza");
+                data[0][7] = res.getString("defensa");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
+        return data;
     }
 
-    public ResultSet seleccionarConj(String nom) {
-        ResultSet rs = null;
+    public Object[][] SelectEnc(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,encantamiento.cmc,encantamiento.color FROM cartas,encantamiento where cartas.nombre='"+nom+"' and encantamiento.nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][6];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
         try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM conjuro where nombre = '"+nom+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return rs;
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
+        return data;
     }
 
-    public ResultSet seleccionarInst(String nom) {
-        ResultSet rs = null;
+    public Object[][] SelectArt(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,artefacto.cmc,artefacto.color FROM cartas,artefacto where cartas.nombre='"+nom+"' and artefacto.nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][6];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
         try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM instantaneo where nombre = '"+nom+"'");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return rs;
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
         }
+        return data;
+    }
+
+    public Object[][] SelectCon(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,conjuro.cmc,conjuro.color FROM cartas,conjuro where cartas.nombre='"+nom+"' and conjuro.nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][6];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
+        try {
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return data;
+    }
+
+    public Object[][] SelectTie(String nom) {
+        String consulta = "Select nombre,tipo,rareza,habilidad FROM tierra where nombre='"+nom+"'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][4];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
+        try {
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return data;
     }
 }

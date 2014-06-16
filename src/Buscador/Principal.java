@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Buscador;
 
 import Objetos.Cartas;
@@ -20,27 +19,28 @@ public class Principal extends javax.swing.JFrame {
     private Cartas c;
     private Conexion con = new Conexion();
     private Metodos met = new Metodos();
-    private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null,nombreViejo = null;
+    private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null, nombreViejo = null;
     private int cmc = 0, fuerza = -1, defensa = -1;
     private Object[][] dtCartas;
-    
-               //Añade icono al jframe
-@Override
+
+    //Añade icono al jframe
+    @Override
     public Image getIconImage() {
         Image retValue = Toolkit.getDefaultToolkit().
                 getImage(ClassLoader.getSystemResource("Imagenes/icono.png"));
-        
+
         return retValue;
     }
+
     /**
      * Creates new form Principal
      */
     public Principal() {
-
-    
         initComponents();
         con.GetConnection();
-        this.cENombre.setModel( con.LlenarComboBox());
+        this.cENombre.setModel(con.LlenarComboBox());
+        //dtCartas=con.SelectIns("4");
+        //System.out.println(dtCartas[0][1].toString());
     }
 
     /**
@@ -53,9 +53,22 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         vBuscar = new javax.swing.JFrame();
+        bDefensa = new javax.swing.JLabel();
+        bFuerza = new javax.swing.JLabel();
+        bColor = new javax.swing.JLabel();
+        bCmc = new javax.swing.JLabel();
+        bRareza = new javax.swing.JLabel();
+        bHabilidad = new javax.swing.JLabel();
+        bTipo = new javax.swing.JLabel();
+        bNombre = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
         vAñadir = new javax.swing.JDialog();
+        jLabel32 = new javax.swing.JLabel();
         vEditar = new javax.swing.JDialog();
+        jLabel33 = new javax.swing.JLabel();
         vAcerca = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
         pInicial = new javax.swing.JPanel();
         paneles = new javax.swing.JTabbedPane();
         pPrincipal = new javax.swing.JPanel();
@@ -94,8 +107,6 @@ public class Principal extends javax.swing.JFrame {
         bAñadir = new javax.swing.JButton();
         rAIncoloro = new javax.swing.JRadioButton();
         tAhabilidad = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        tAimagen = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         pEditar = new javax.swing.JPanel();
         bEditar = new javax.swing.JButton();
@@ -124,8 +135,6 @@ public class Principal extends javax.swing.JFrame {
         rENegro = new javax.swing.JRadioButton();
         rEIncoloro = new javax.swing.JRadioButton();
         tEhabilidad = new javax.swing.JTextField();
-        tEimagen = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         pBuscar = new javax.swing.JPanel();
         bBuscar = new javax.swing.JButton();
@@ -150,48 +159,151 @@ public class Principal extends javax.swing.JFrame {
         mAyuda = new javax.swing.JMenu();
         macerca = new javax.swing.JMenuItem();
 
+        vBuscar.setMinimumSize(new java.awt.Dimension(254, 180));
+        vBuscar.setPreferredSize(new java.awt.Dimension(254, 180));
+
+        bDefensa.setText("Defensa");
+
+        bFuerza.setText("Fuerza");
+
+        bColor.setText("Color");
+
+        bCmc.setText("Cmc");
+
+        bRareza.setText("Rareza");
+
+        bHabilidad.setText("Habilidad");
+
+        bTipo.setText("Tipo");
+
+        bNombre.setText("Nombre");
+
+        jLabel31.setText("/");
+
         javax.swing.GroupLayout vBuscarLayout = new javax.swing.GroupLayout(vBuscar.getContentPane());
         vBuscar.getContentPane().setLayout(vBuscarLayout);
         vBuscarLayout.setHorizontalGroup(
             vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bCmc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bColor, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bHabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(bRareza, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addComponent(bFuerza)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bDefensa))
         );
         vBuscarLayout.setVerticalGroup(
             vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(vBuscarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bNombre)
+                    .addComponent(bCmc)
+                    .addComponent(bColor))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bHabilidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bRareza)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bTipo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel31)
+                    .addComponent(bDefensa)
+                    .addComponent(bFuerza))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
+
+        vAñadir.setMinimumSize(new java.awt.Dimension(357, 100));
+        vAñadir.setPreferredSize(new java.awt.Dimension(357, 100));
+
+        jLabel32.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
+        jLabel32.setText("Carta insertada correctamente.");
 
         javax.swing.GroupLayout vAñadirLayout = new javax.swing.GroupLayout(vAñadir.getContentPane());
         vAñadir.getContentPane().setLayout(vAñadirLayout);
         vAñadirLayout.setHorizontalGroup(
             vAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(vAñadirLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel32)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         vAñadirLayout.setVerticalGroup(
             vAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(vAñadirLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel32)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        vEditar.setMinimumSize(new java.awt.Dimension(220, 100));
+        vEditar.setPreferredSize(new java.awt.Dimension(220, 100));
+
+        jLabel33.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
+        jLabel33.setText("Carta modificada.");
 
         javax.swing.GroupLayout vEditarLayout = new javax.swing.GroupLayout(vEditar.getContentPane());
         vEditar.getContentPane().setLayout(vEditarLayout);
         vEditarLayout.setHorizontalGroup(
             vEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(vEditarLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel33)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         vEditarLayout.setVerticalGroup(
             vEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(vEditarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel33)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        vAcerca.setMinimumSize(new java.awt.Dimension(412, 313));
+
+        jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(0, 0, 153));
+        jTextArea1.setRows(5);
+        jTextArea1.setText("\n\tBuscadorMTG v1.0\n\t\nDesarroyadores:\n\nYago Casal Quintas.\nMiguel Angel Perez Silva.\nRaul Saa Perez.\n\n\n\n\nCopyright all right reserved to Project666 Entertiment\n\n");
+        jTextArea1.setAutoscrolls(false);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)));
+        jScrollPane2.setViewportView(jTextArea1);
 
         javax.swing.GroupLayout vAcercaLayout = new javax.swing.GroupLayout(vAcerca.getContentPane());
         vAcerca.getContentPane().setLayout(vAcercaLayout);
         vAcercaLayout.setHorizontalGroup(
             vAcercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(vAcercaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addContainerGap())
         );
         vAcercaLayout.setVerticalGroup(
             vAcercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(vAcercaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -259,6 +371,7 @@ public class Principal extends javax.swing.JFrame {
         pVisualizar.setMinimumSize(new java.awt.Dimension(670, 670));
         pVisualizar.setPreferredSize(new java.awt.Dimension(670, 670));
 
+        tabla.setFont(new java.awt.Font("Magic:the Gathering", 0, 14)); // NOI18N
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -296,7 +409,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(pVisualizarLayout.createSequentialGroup()
                         .addGap(251, 251, 251)
                         .addComponent(bVisualizar)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(216, Short.MAX_VALUE))
             .addGroup(pVisualizarLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 655, Short.MAX_VALUE)
@@ -439,8 +552,6 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setText("Link Imagen:");
-
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner2.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pAñadirLayout = new javax.swing.GroupLayout(pAñadir);
@@ -450,20 +561,10 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(pAñadirLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(pAñadirLayout.createSequentialGroup()
                         .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pAñadirLayout.createSequentialGroup()
-                                .addComponent(bAñadir)
-                                .addGap(410, 410, 410)
-                                .addComponent(jLabel14))
-                            .addComponent(jLabel3))
-                        .addGap(22, 22, Short.MAX_VALUE))
-                    .addGroup(pAñadirLayout.createSequentialGroup()
-                        .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(pAñadirLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(18, 18, 18)
-                                .addComponent(tAimagen))
+                            .addComponent(bAñadir)
                             .addGroup(pAñadirLayout.createSequentialGroup()
                                 .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pAñadirLayout.createSequentialGroup()
@@ -510,7 +611,9 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(jLabel7)
                                             .addGap(18, 18, 18)
                                             .addComponent(tAhabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                        .addComponent(jLabel14)))
+                .addContainerGap())
         );
         pAñadirLayout.setVerticalGroup(
             pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,11 +669,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(eADefensa)
                                     .addComponent(cADefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(12, 12, 12)
-                        .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(tAimagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(40, 40, 40)
                         .addComponent(bAñadir))
                     .addComponent(jLabel14))
                 .addContainerGap(259, Short.MAX_VALUE))
@@ -671,8 +770,6 @@ public class Principal extends javax.swing.JFrame {
         rEIncoloro.setForeground(new java.awt.Color(102, 102, 102));
         rEIncoloro.setText("Incoloro");
 
-        jLabel13.setText("Link Imagen:");
-
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner1.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pEditarLayout = new javax.swing.GroupLayout(pEditar);
@@ -681,11 +778,7 @@ public class Principal extends javax.swing.JFrame {
             pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pEditarLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pEditarLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(tEimagen))
+                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pEditarLayout.createSequentialGroup()
                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pEditarLayout.createSequentialGroup()
@@ -794,11 +887,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(rENegro)
                                     .addComponent(rEIncoloro))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(tEimagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(31, 31, 31)
                         .addComponent(bEditar))
                     .addComponent(jLabel10))
                 .addContainerGap(289, Short.MAX_VALUE))
@@ -823,6 +912,12 @@ public class Principal extends javax.swing.JFrame {
         jLabel27.setText("siguiente formulario y presiona el boton para buscar:");
 
         jLabel28.setText("En esta pestaña puedes buscar una carta de nuestra base de datos, para ello cubre el");
+
+        tBNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tBNombreActionPerformed(evt);
+            }
+        });
 
         cBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra" }));
         cBTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -925,6 +1020,11 @@ public class Principal extends javax.swing.JFrame {
         mArchivo.setText("Archivo");
 
         mVisualizar.setText("Visualizar lista  de cartas");
+        mVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mVisualizarActionPerformed(evt);
+            }
+        });
         mArchivo.add(mVisualizar);
 
         mAñadir.setText("Añadir carta nueva");
@@ -937,6 +1037,11 @@ public class Principal extends javax.swing.JFrame {
         mArchivo.add(mBuscar);
 
         mSalir.setText("Salir");
+        mSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mSalirActionPerformed(evt);
+            }
+        });
         mArchivo.add(mSalir);
 
         menu.add(mArchivo);
@@ -944,6 +1049,11 @@ public class Principal extends javax.swing.JFrame {
         mAyuda.setText("Ayuda");
 
         macerca.setText("Acerca de");
+        macerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                macercaActionPerformed(evt);
+            }
+        });
         mAyuda.add(macerca);
 
         menu.add(mAyuda);
@@ -970,29 +1080,29 @@ public class Principal extends javax.swing.JFrame {
 
     private void cARarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cARarezaActionPerformed
         if (cARareza.getSelectedIndex() == 1) {
-            rareza = "comun";
+            rareza = "Comun";
         } else if (cARareza.getSelectedIndex() == 2) {
-            rareza = "infrecuente";
+            rareza = "Infrecuente";
         } else if (cARareza.getSelectedIndex() == 3) {
-            rareza = "rara";
+            rareza = "Rara";
         } else if (cARareza.getSelectedIndex() == 4) {
-            rareza = "mitica";
+            rareza = "Rara Mitica";
         }
     }//GEN-LAST:event_cARarezaActionPerformed
 
     private void cBTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBTipoActionPerformed
         if (cBTipo.getSelectedIndex() == 1) {
-             tipo = "artefacto";
+            tipo = "Artefacto";
         } else if (cBTipo.getSelectedIndex() == 2) {
-            tipo = "criatura";
+            tipo = "Criatura";
         } else if (cBTipo.getSelectedIndex() == 3) {
-            tipo = "conjuro";
+            tipo = "Conjuro";
         } else if (cBTipo.getSelectedIndex() == 4) {
-            tipo = "encantamiento";
+            tipo = "Encantamiento";
         } else if (cBTipo.getSelectedIndex() == 5) {
-            tipo = "instantaneo";
+            tipo = "Instantaneo";
         } else if (cBTipo.getSelectedIndex() == 6) {
-            tipo = "tierra";
+            tipo = "Tierra";
         }
     }//GEN-LAST:event_cBTipoActionPerformed
 
@@ -1009,31 +1119,41 @@ public class Principal extends javax.swing.JFrame {
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
-            tipo = "artefacto";
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            tipo = "Artefacto";
         } else if (cETipo.getSelectedIndex() == 2) {
             eEFuerza.setEnabled(true);
             cEFuerza.setEnabled(true);
             eEDefensa.setEnabled(true);
             cEDefensa.setEnabled(true);
-            tipo = "criatura";
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            tipo = "Criatura";
         } else if (cETipo.getSelectedIndex() == 3) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
-            tipo = "conjuro";
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            tipo = "Conjuro";
         } else if (cETipo.getSelectedIndex() == 4) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
-            tipo = "encantamiento";
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            tipo = "Encantamiento";
         } else if (cETipo.getSelectedIndex() == 5) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
             eEDefensa.setEnabled(false);
             cEDefensa.setEnabled(false);
-            tipo = "instantaneo";
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            tipo = "Instantaneo";
         } else if (cETipo.getSelectedIndex() == 6) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
@@ -1041,7 +1161,7 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eACmc.setEnabled(false);
             tACmc.setEnabled(false);
-            tipo = "tierra";
+            tipo = "Tierra";
         }
     }//GEN-LAST:event_cETipoActionPerformed
 
@@ -1058,31 +1178,41 @@ public class Principal extends javax.swing.JFrame {
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipo = "artefacto";
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            tipo = "Artefacto";
         } else if (cATipo.getSelectedIndex() == 2) {
             eAFuerza.setEnabled(true);
             cAFuerza.setEnabled(true);
             eADefensa.setEnabled(true);
             cADefensa.setEnabled(true);
-            tipo = "criatura";
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            tipo = "Criatura";
         } else if (cATipo.getSelectedIndex() == 3) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipo = "conjuro";
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            tipo = "Conjuro";
         } else if (cATipo.getSelectedIndex() == 4) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipo = "encantamiento";
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            tipo = "Encantamiento";
         } else if (cATipo.getSelectedIndex() == 5) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
             eADefensa.setEnabled(false);
             cADefensa.setEnabled(false);
-            tipo = "instantaneo";
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            tipo = "Instantaneo";
         } else if (cATipo.getSelectedIndex() == 6) {
             eAFuerza.setEnabled(false);
             cAFuerza.setEnabled(false);
@@ -1090,38 +1220,98 @@ public class Principal extends javax.swing.JFrame {
             cADefensa.setEnabled(false);
             eACmc.setEnabled(false);
             tACmc.setEnabled(false);
-            tipo = "tierra";
+            tipo = "Tierra";
         }
     }//GEN-LAST:event_cATipoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        // TODO add your handling code here:
+        nombre = tBNombre.getText();
+        habilidad = tBhabilidad.getText();
+        switch (tipo) {
+            case "Instantaneo":
+                dtCartas = con.SelectIns(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                bColor.setText(dtCartas[0][5].toString());
+                break;
+            case "Criatura":
+                dtCartas = con.SelectCria(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                bColor.setText(dtCartas[0][5].toString());
+                bFuerza.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
+                bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][7].toString())));
+                break;
+            case "Encantamiento":
+                dtCartas = con.SelectEnc(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                bColor.setText(dtCartas[0][5].toString());
+                break;
+            case "Artefacto":
+                dtCartas = con.SelectArt(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                bColor.setText(dtCartas[0][5].toString());
+                break;
+            case "Conjuro":
+                dtCartas = con.SelectCon(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                bColor.setText(dtCartas[0][5].toString());
+                break;
+            case "Tierra":
+                dtCartas = con.SelectTie(nombre);
+                bNombre.setText(dtCartas[0][0].toString());
+                bTipo.setText(dtCartas[0][1].toString());
+                bRareza.setText(dtCartas[0][2].toString());
+                bHabilidad.setText(dtCartas[0][3].toString());
+                break;
+        }
+
+        vBuscar.setVisible(true);
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
         nombre = tANombre.getText();
         habilidad = tAhabilidad.getText();
-        if (tACmc.isEnabled()){
-          cmc =Integer.parseInt(tACmc.getText());  
-        }else{
-            cmc=0;
+        if (tACmc.isEnabled()) {
+            cmc = Integer.parseInt(tACmc.getText());
+        } else {
+            cmc = 0;
         }
         Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
-        this.cENombre.setModel( con.LlenarComboBox());
+        this.cENombre.setModel(con.LlenarComboBox());
+        vAñadir.setVisible(true);
     }//GEN-LAST:event_bAñadirActionPerformed
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
         //actualiza los datos de la tabla realizando una consulta a la base de datos
-        String[] columNames = {"Nombre" ,"Tipo","Rareza","Habilidad"};
+        String[] columNames = {"Nombre", "Tipo", "Rareza", "Habilidad"};
         dtCartas = con.Select_Cartas();
         // se colocan los datos en la tabla
-        DefaultTableModel datos = new DefaultTableModel(dtCartas,columNames);
+        DefaultTableModel datos = new DefaultTableModel(dtCartas, columNames);
         tabla.setModel(datos);
     }//GEN-LAST:event_bVisualizarActionPerformed
 
     private void rAAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAAzulActionPerformed
         if (rAAzul.isSelected() == true) {
-            color = "azul";
+            color = "Azul";
             rABlanco.setSelected(false);
             rANegro.setSelected(false);
             rAVerde.setSelected(false);
@@ -1132,7 +1322,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void rABlancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rABlancoActionPerformed
         if (rABlanco.isSelected() == true) {
-            color = "blanco";
+            color = "Blanco";
             rAAzul.setSelected(false);
             rANegro.setSelected(false);
             rAVerde.setSelected(false);
@@ -1142,8 +1332,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_rABlancoActionPerformed
 
     private void rANegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rANegroActionPerformed
-        if (rANegro.isSelected()==true){
-            color = "negro";
+        if (rANegro.isSelected() == true) {
+            color = "Negro";
             rABlanco.setSelected(false);
             rAAzul.setSelected(false);
             rAVerde.setSelected(false);
@@ -1153,8 +1343,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_rANegroActionPerformed
 
     private void rAVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAVerdeActionPerformed
-        if (rAVerde.isSelected()==true){
-            color = "verde";
+        if (rAVerde.isSelected() == true) {
+            color = "Verde";
             rABlanco.setSelected(false);
             rAAzul.setSelected(false);
             rANegro.setSelected(false);
@@ -1164,8 +1354,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_rAVerdeActionPerformed
 
     private void rAIncoloroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rAIncoloroActionPerformed
-        if (rAIncoloro.isSelected()==true){
-            color = "incoloro";
+        if (rAIncoloro.isSelected() == true) {
+            color = "Incoloro";
             rABlanco.setSelected(false);
             rAAzul.setSelected(false);
             rANegro.setSelected(false);
@@ -1175,8 +1365,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_rAIncoloroActionPerformed
 
     private void rARojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rARojoActionPerformed
-        if (rARojo.isSelected()==true){
-            color = "rojo";
+        if (rARojo.isSelected() == true) {
+            color = "Rojo";
             rABlanco.setSelected(false);
             rAAzul.setSelected(false);
             rANegro.setSelected(false);
@@ -1262,44 +1452,38 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cADefensaActionPerformed
 
     private void cENombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cENombreActionPerformed
-       /* dtCartas = con.Select_Cartas();
-        String[] columNames = {"Nombre" ,"Tipo","Rareza","Habilidad"};
-         for (int i = 0; i < dtCartas.length; i++) {
-                for (int j = 0; j < dtCartas[i].length; j++) {
-                    cENombre.setSelectedItem(dtCartas[i][j]);
-                }
-            }*/
-        //actualiza los datos de la tabla realizando una consulta a la base de datos
-        String[] columNames = {"Nombre" ,"Tipo","Rareza","Habilidad"};
-        dtCartas = con.Select_Cartas();
-        // se colocan los datos en la tabla
         
-        DefaultTableModel datos = new DefaultTableModel(dtCartas,columNames);
+        //actualiza los datos de la tabla realizando una consulta a la base de datos
+        String[] columNames = {"Nombre", "Tipo", "Rareza", "Habilidad"};
+        dtCartas = con.Select_Cartas();
+        // se colocan los datos en la tabl
+        DefaultTableModel datos = new DefaultTableModel(dtCartas, columNames);
         tabla.setModel(datos);
     }//GEN-LAST:event_cENombreActionPerformed
 
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
         nombre = tENombre.getText();
         habilidad = tEhabilidad.getText();
-        if (tECmc.isEnabled()){
-          cmc =Integer.parseInt(tECmc.getText());  
-        }else{
-            cmc=0;
+        if (tECmc.isEnabled()) {
+            cmc = Integer.parseInt(tECmc.getText());
+        } else {
+            cmc = 0;
         }
         nombreViejo = cENombre.getSelectedItem().toString();
         Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
-        this.cENombre.setModel( con.LlenarComboBox());
+        this.cENombre.setModel(con.LlenarComboBox());
+        vEditar.setVisible(true);
     }//GEN-LAST:event_bEditarActionPerformed
 
     private void cERarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cERarezaActionPerformed
         if (cERareza.getSelectedIndex() == 1) {
-            rareza = "comun";
+            rareza = "Comun";
         } else if (cERareza.getSelectedIndex() == 2) {
-            rareza = "infrecuente";
+            rareza = "Infrecuente";
         } else if (cERareza.getSelectedIndex() == 3) {
-            rareza = "rara";
+            rareza = "Rara";
         } else if (cERareza.getSelectedIndex() == 4) {
-            rareza = "mitica";
+            rareza = "Rara Mitica";
         }
     }//GEN-LAST:event_cERarezaActionPerformed
 
@@ -1381,19 +1565,35 @@ public class Principal extends javax.swing.JFrame {
 
     private void cBRarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBRarezaActionPerformed
         if (cBRareza.getSelectedIndex() == 1) {
-            rareza = "comun";
+            rareza = "Comun";
         } else if (cBRareza.getSelectedIndex() == 2) {
-            rareza = "infrecuente";
+            rareza = "Infrecuente";
         } else if (cBRareza.getSelectedIndex() == 3) {
-            rareza = "rara";
+            rareza = "Rara";
         } else if (cBRareza.getSelectedIndex() == 4) {
-            rareza = "mitica";
+            rareza = "Rara Mitica";
         }
     }//GEN-LAST:event_cBRarezaActionPerformed
 
     private void tACmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tACmcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tACmcActionPerformed
+
+    private void mVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVisualizarActionPerformed
+
+    }//GEN-LAST:event_mVisualizarActionPerformed
+
+    private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
+
+    }//GEN-LAST:event_mSalirActionPerformed
+
+    private void tBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBNombreActionPerformed
+
+    }//GEN-LAST:event_tBNombreActionPerformed
+
+    private void macercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macercaActionPerformed
+        vAcerca.setVisible(true);
+    }//GEN-LAST:event_macercaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1433,7 +1633,15 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAñadir;
     private javax.swing.JButton bBuscar;
+    private javax.swing.JLabel bCmc;
+    private javax.swing.JLabel bColor;
+    private javax.swing.JLabel bDefensa;
     private javax.swing.JButton bEditar;
+    private javax.swing.JLabel bFuerza;
+    private javax.swing.JLabel bHabilidad;
+    private javax.swing.JLabel bNombre;
+    private javax.swing.JLabel bRareza;
+    private javax.swing.JLabel bTipo;
     private javax.swing.JButton bVisualizar;
     private javax.swing.JComboBox cADefensa;
     private javax.swing.JComboBox cAFuerza;
@@ -1455,8 +1663,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1476,6 +1682,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
@@ -1485,6 +1694,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu mArchivo;
     private javax.swing.JMenu mAyuda;
     private javax.swing.JMenuItem mAñadir;
@@ -1516,13 +1727,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tACmc;
     private javax.swing.JTextField tANombre;
     private javax.swing.JTextField tAhabilidad;
-    private javax.swing.JTextField tAimagen;
     private javax.swing.JTextField tBNombre;
     private javax.swing.JTextField tBhabilidad;
     private javax.swing.JTextField tECmc;
     private javax.swing.JTextField tENombre;
     private javax.swing.JTextField tEhabilidad;
-    private javax.swing.JTextField tEimagen;
     private javax.swing.JTable tabla;
     private javax.swing.JDialog vAcerca;
     private javax.swing.JDialog vAñadir;

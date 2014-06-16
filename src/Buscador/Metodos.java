@@ -5,15 +5,6 @@
 package Buscador;
 
 import Objetos.*;
-//<<<<<<< HEAD
-import java.io.*;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-//=======
-//>>>>>>> origin/master
 
 /**
  *
@@ -48,27 +39,27 @@ public class Metodos {
         Conexion cox = new Conexion();
         if (existe(nombre) == false) {
             switch (tipo) {
-                case "criatura":
+                case "Criatura":
                     c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
-                case "encantamiento":
+                case "Encantamiento":
                     c = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
-                case "artefacto":
+                case "Artefacto":
                     c = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
-                case "instantaneo":
+                case "Instantaneo":
                     c = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
-                case "conjuro":
+                case "Conjuro":
                     c = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
-                case "tierra":
+                case "Tierra":
                     c = new Tierra(habilidad, nombre, tipo, rareza);
                     cox.insertar(c);
                     break;
@@ -82,319 +73,31 @@ public class Metodos {
         Conexion cox = new Conexion();
         if (existe(nombreViejo) == false) {
             switch (tipo) {
-                case "criatura":
+                case "Criatura":
                     c = new Criatura(cmc, color, habilidad, fuerza, defensa, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
-                case "encantamiento":
+                case "Encantamiento":
                     c = new Encantamiento(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
-                case "artefacto":
+                case "Artefacto":
                     c = new Artefacto(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
-                case "instantaneo":
+                case "Instantaneo":
                     c = new Instantaneo(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
-                case "conjuro":
+                case "Conjuro":
                     c = new Conjuro(cmc, color, habilidad, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
-                case "tierra":
+                case "Tierra":
                     c = new Tierra(habilidad, nombre, tipo, rareza);
                     cox.editar(c, nombreViejo);
                     break;
             }
         }
     }
-
-    public static Cartas buscar(String nombre, String tipo, String rareza, String habilidad) {
-        Cartas c = null;
-        Conexion cox = new Conexion();
-        Cartas aux[][] = null;
-        ResultSet s = null;
-        if (existe(nombre) == true) {
-            aux = (Cartas[][]) cox.seleccionarLista();
-            switch (tipo) {
-                case "criatura":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza.equalsIgnoreCase(aux[i][j].getRareza())) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarCria(nombre);
-                                            try {
-                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarCria(nombre);
-                                            try {
-                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarCria(nombre);
-                                            try {
-                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarCria(nombre);
-                                            try {
-                                                c = new Criatura(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), s.getInt("fuerza"), s.getInt("defensa"), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "encantamiento":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza.equalsIgnoreCase(aux[i][j].getRareza())) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarEncan(nombre);
-                                            try {
-                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarEncan(nombre);
-                                            try {
-                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarEncan(nombre);
-                                            try {
-                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarEncan(nombre);
-                                            try {
-                                                c = new Encantamiento(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "artefacto":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza == aux[i][j].getRareza()) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarArte(nombre);
-                                            try {
-                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarArte(nombre);
-                                            try {
-                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarArte(nombre);
-                                            try {
-                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarArte(nombre);
-                                            try {
-                                                c = new Artefacto(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "instantaneo":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza.equalsIgnoreCase(aux[i][j].getRareza())) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarInst(nombre);
-                                            try {
-                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarInst(nombre);
-                                            try {
-                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarInst(nombre);
-                                            try {
-                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarInst(nombre);
-                                            try {
-                                                c = new Instantaneo(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "conjuro":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza.equalsIgnoreCase(aux[i][j].getRareza())) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarConj(nombre);
-                                            try {
-                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarConj(nombre);
-                                            try {
-                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarConj(nombre);
-                                            try {
-                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            s = cox.seleccionarConj(nombre);
-                                            try {
-                                                c = new Conjuro(s.getInt("cmc"), s.getString("color"), aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                            } catch (SQLException ex) {
-                                                Logger.getLogger(Metodos.class.getName()).log(Level.SEVERE, null, ex);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-                case "tierra":
-                    for (int i = 0; i < aux.length; i++) {
-                        for (int j = 0; j < aux[i].length; j++) {
-                            if (aux[i][j].getTipo().compareToIgnoreCase(tipo) == 0) {
-                                if (rareza.equalsIgnoreCase(aux[i][j].getRareza())) {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                        }
-                                    } else {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                        }
-                                    }
-                                } else {
-                                    if (habilidad.equalsIgnoreCase(aux[i][j].getHabilidad())) {
-                                        if (nombre.equalsIgnoreCase(aux[i][j].getNombre())) {
-                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                        }
-                                    } else {
-                                        if (nombre.equals(aux[i][j].getNombre())) {
-                                            c = new Tierra(aux[i][j].getHabilidad(), aux[i][j].getNombre(), aux[i][j].getTipo(), aux[i][j].getRareza());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    break;
-            }
-        }
-        return c;
-    }
-
 }
