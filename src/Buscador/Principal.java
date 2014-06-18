@@ -8,6 +8,7 @@ package Buscador;
 import Objetos.Cartas;
 import java.awt.Image;
 import java.awt.Toolkit;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +20,7 @@ public class Principal extends javax.swing.JFrame {
     private Cartas c;
     private Conexion con = new Conexion();
     private Metodos met = new Metodos();
-    private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null, nombreViejo = null;
+    private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null, nombreViejo = null, tipoViejo = null;
     private int cmc = 0, fuerza = -1, defensa = -1;
     private Object[][] dtCartas;
 
@@ -39,6 +40,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         con.GetConnection();
         this.cENombre.setModel(con.LlenarComboBox());
+        this.cBNombre.setModel(con.LlenarComboBox());
         //dtCartas=con.SelectIns("4");
         //System.out.println(dtCartas[0][1].toString());
     }
@@ -65,9 +67,9 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         bHabilidad = new javax.swing.JTextArea();
         vAñadir = new javax.swing.JDialog();
-        jLabel32 = new javax.swing.JLabel();
+        tAñadido = new javax.swing.JLabel();
         vEditar = new javax.swing.JDialog();
-        jLabel33 = new javax.swing.JLabel();
+        tEAñadido = new javax.swing.JLabel();
         vAcerca = new javax.swing.JDialog();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -146,23 +148,16 @@ public class Principal extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        tBNombre = new javax.swing.JTextField();
         cBTipo = new javax.swing.JComboBox();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        cBRareza = new javax.swing.JComboBox();
-        tBhabilidad = new javax.swing.JTextField();
         jLabel24 = new javax.swing.JLabel();
+        cBNombre = new javax.swing.JComboBox();
         menu = new javax.swing.JMenuBar();
         mArchivo = new javax.swing.JMenu();
-        mVisualizar = new javax.swing.JMenuItem();
-        mAñadir = new javax.swing.JMenuItem();
-        mEditar = new javax.swing.JMenuItem();
-        mBuscar = new javax.swing.JMenuItem();
         mSalir = new javax.swing.JMenuItem();
         mAyuda = new javax.swing.JMenu();
         macerca = new javax.swing.JMenuItem();
 
+        vBuscar.setIconImage(getIconImage());
         vBuscar.setMinimumSize(new java.awt.Dimension(535, 350));
         vBuscar.setPreferredSize(new java.awt.Dimension(535, 3350));
 
@@ -221,7 +216,7 @@ public class Principal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(bDefensa))
                                     .addComponent(bRareza, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         vBuscarLayout.setVerticalGroup(
             vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -249,11 +244,12 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(3029, Short.MAX_VALUE))
         );
 
+        vAñadir.setIconImage(getIconImage());
         vAñadir.setMinimumSize(new java.awt.Dimension(357, 100));
         vAñadir.setPreferredSize(new java.awt.Dimension(357, 100));
 
-        jLabel32.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
-        jLabel32.setText("Carta insertada correctamente.");
+        tAñadido.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
+        tAñadido.setText("Carta insertada correctamente.");
 
         javax.swing.GroupLayout vAñadirLayout = new javax.swing.GroupLayout(vAñadir.getContentPane());
         vAñadir.getContentPane().setLayout(vAñadirLayout);
@@ -261,22 +257,23 @@ public class Principal extends javax.swing.JFrame {
             vAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vAñadirLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel32)
+                .addComponent(tAñadido)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         vAñadirLayout.setVerticalGroup(
             vAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vAñadirLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel32)
+                .addComponent(tAñadido)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        vEditar.setIconImage(getIconImage());
         vEditar.setMinimumSize(new java.awt.Dimension(220, 100));
         vEditar.setPreferredSize(new java.awt.Dimension(220, 100));
 
-        jLabel33.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
-        jLabel33.setText("Carta modificada.");
+        tEAñadido.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
+        tEAñadido.setText("Carta modificada.");
 
         javax.swing.GroupLayout vEditarLayout = new javax.swing.GroupLayout(vEditar.getContentPane());
         vEditar.getContentPane().setLayout(vEditarLayout);
@@ -284,17 +281,18 @@ public class Principal extends javax.swing.JFrame {
             vEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vEditarLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel33)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(tEAñadido, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         vEditarLayout.setVerticalGroup(
             vEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vEditarLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel33)
+                .addComponent(tEAñadido)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        vAcerca.setIconImage(null);
         vAcerca.setMinimumSize(new java.awt.Dimension(412, 313));
 
         jTextArea1.setEditable(false);
@@ -460,6 +458,8 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel5.setText("Nombre:");
 
+        tANombre.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+
         jLabel6.setText("Tipo:");
 
         jLabel7.setText("Habilidad:");
@@ -528,6 +528,7 @@ public class Principal extends javax.swing.JFrame {
 
         eACmc.setText("Coste de Mana Convertido:");
 
+        tACmc.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
         tACmc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tACmcActionPerformed(evt);
@@ -575,6 +576,7 @@ public class Principal extends javax.swing.JFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner2.jpg"))); // NOI18N
 
         tAhabilidad.setColumns(20);
+        tAhabilidad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
         tAhabilidad.setRows(5);
         tAhabilidad.setMaximumSize(new java.awt.Dimension(164, 94));
         tAhabilidad.setMinimumSize(new java.awt.Dimension(164, 94));
@@ -626,7 +628,7 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAñadirLayout.createSequentialGroup()
                                             .addComponent(eACmc)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(tACmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAñadirLayout.createSequentialGroup()
                                             .addGap(1, 1, 1)
@@ -639,7 +641,7 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(jScrollPane4))))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel14)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         pAñadirLayout.setVerticalGroup(
             pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -740,6 +742,8 @@ public class Principal extends javax.swing.JFrame {
 
         eECmc.setText("Coste de Mana Convertido:");
 
+        tECmc.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+
         jLabel16.setText("Color:");
 
         jLabel17.setText("Tipo:");
@@ -762,6 +766,8 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel19.setText("Habilidad:");
 
+        tENombre.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+
         jLabel20.setText("Nombre:");
 
         jLabel21.setText("formulario y presiona editar:");
@@ -779,29 +785,60 @@ public class Principal extends javax.swing.JFrame {
         rEAzul.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rEAzul.setForeground(new java.awt.Color(0, 51, 204));
         rEAzul.setText(" Azul +");
+        rEAzul.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rEAzulActionPerformed(evt);
+            }
+        });
 
         rERojo.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rERojo.setForeground(new java.awt.Color(255, 0, 0));
         rERojo.setText("Rojo < ");
+        rERojo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rERojoActionPerformed(evt);
+            }
+        });
 
         rEBlanco.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rEBlanco.setForeground(new java.awt.Color(255, 255, 204));
         rEBlanco.setText("Blanco @ ");
+        rEBlanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rEBlancoActionPerformed(evt);
+            }
+        });
 
         rEVerde.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rEVerde.setForeground(new java.awt.Color(51, 130, 60));
         rEVerde.setText("Verde > ");
+        rEVerde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rEVerdeActionPerformed(evt);
+            }
+        });
 
         rENegro.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rENegro.setText(" Negro =");
+        rENegro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rENegroActionPerformed(evt);
+            }
+        });
 
         rEIncoloro.setFont(new java.awt.Font("Magic:the Gathering", 0, 18)); // NOI18N
         rEIncoloro.setForeground(new java.awt.Color(102, 102, 102));
         rEIncoloro.setText("Incoloro");
+        rEIncoloro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rEIncoloroActionPerformed(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner1.jpg"))); // NOI18N
 
         tEhabilidad.setColumns(20);
+        tEhabilidad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
         tEhabilidad.setRows(5);
         tEhabilidad.setMaximumSize(new java.awt.Dimension(164, 94));
         tEhabilidad.setMinimumSize(new java.awt.Dimension(164, 94));
@@ -858,20 +895,18 @@ public class Principal extends javax.swing.JFrame {
                                         .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(bEditar)
                             .addGroup(pEditarLayout.createSequentialGroup()
-                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(pEditarLayout.createSequentialGroup()
-                                        .addComponent(jLabel20)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel19))
-                                    .addGroup(pEditarLayout.createSequentialGroup()
-                                        .addComponent(jLabel23)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel20)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                                .addComponent(tENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pEditarLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel10)
                         .addGap(50, 50, 50))))
         );
@@ -932,7 +967,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(bEditar))
                     .addComponent(jLabel10))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(288, Short.MAX_VALUE))
         );
 
         paneles.addTab("Editar carta", pEditar);
@@ -955,12 +990,6 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel28.setText("En esta pestaña puedes buscar una carta de nuestra base de datos, para ello cubre el");
 
-        tBNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tBNombreActionPerformed(evt);
-            }
-        });
-
         cBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra" }));
         cBTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -968,18 +997,13 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jLabel29.setText("Habilidad:");
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner-Magic_the_Gathering.jpg"))); // NOI18N
 
-        jLabel30.setText("Rareza:");
-
-        cBRareza.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona una rareza", "Comun", "Infrecuente", "Rara", "Rara Mitica" }));
-        cBRareza.addActionListener(new java.awt.event.ActionListener() {
+        cBNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cBRarezaActionPerformed(evt);
+                cBNombreActionPerformed(evt);
             }
         });
-
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner-Magic_the_Gathering.jpg"))); // NOI18N
 
         javax.swing.GroupLayout pBuscarLayout = new javax.swing.GroupLayout(pBuscar);
         pBuscar.setLayout(pBuscarLayout);
@@ -988,33 +1012,22 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(pBuscarLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel28)
+                    .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(bBuscar)
+                        .addComponent(jLabel27))
                     .addGroup(pBuscarLayout.createSequentialGroup()
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bBuscar)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel28))
-                        .addGap(20, 262, Short.MAX_VALUE))
-                    .addGroup(pBuscarLayout.createSequentialGroup()
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel26)
-                            .addComponent(jLabel25))
+                        .addComponent(jLabel26)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel30))
-                        .addGap(18, 18, 18)
-                        .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tBhabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cBRareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pBuscarLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87))
+                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pBuscarLayout.createSequentialGroup()
+                                .addComponent(cBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel25)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(20, 132, Short.MAX_VALUE))
         );
         pBuscarLayout.setVerticalGroup(
             pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1023,23 +1036,17 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel28)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel27)
-                .addGap(33, 33, 33)
+                .addGap(34, 34, 34)
                 .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(tBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel29)
-                    .addComponent(tBhabilidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
                     .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30)
-                    .addComponent(cBRareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54)
+                    .addComponent(cBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40)
                 .addComponent(bBuscar)
-                .addGap(51, 51, 51)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(386, Short.MAX_VALUE))
         );
 
         paneles.addTab("Buscar carta", pBuscar);
@@ -1060,23 +1067,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         mArchivo.setText("Archivo");
-
-        mVisualizar.setText("Visualizar lista  de cartas");
-        mVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mVisualizarActionPerformed(evt);
-            }
-        });
-        mArchivo.add(mVisualizar);
-
-        mAñadir.setText("Añadir carta nueva");
-        mArchivo.add(mAñadir);
-
-        mEditar.setText("Editar una carta");
-        mArchivo.add(mEditar);
-
-        mBuscar.setText("Buscar una carta");
-        mArchivo.add(mBuscar);
 
         mSalir.setText("Salir");
         mSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -1267,96 +1257,149 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cATipoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        nombre = tBNombre.getText();
-        habilidad = tBhabilidad.getText();
-        switch (tipo) {
-            case "Instantaneo":
-                dtCartas = con.SelectIns(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                bColor.setText(dtCartas[0][5].toString());
-                bFuerza.setVisible(false);
-                bDefensa.setVisible(false);
-                separador.setVisible(false);
-                break;
-            case "Criatura":
-                dtCartas = con.SelectCria(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                bColor.setText(dtCartas[0][5].toString());
-                bFuerza.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
-                bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][7].toString())));
-                break;
-            case "Encantamiento":
-                dtCartas = con.SelectEnc(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                bColor.setText(dtCartas[0][5].toString());
-                bFuerza.setVisible(false);
-                bDefensa.setVisible(false);
-                separador.setVisible(false);
-                break;
-            case "Artefacto":
-                dtCartas = con.SelectArt(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                bColor.setText(dtCartas[0][5].toString());
-                bFuerza.setVisible(false);
-                bDefensa.setVisible(false);
-                separador.setVisible(false);
-                break;
-            case "Conjuro":
-                dtCartas = con.SelectCon(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                bColor.setText(dtCartas[0][5].toString());
-                bFuerza.setVisible(false);
-                bDefensa.setVisible(false);
-                separador.setVisible(false);
-                break;
-            case "Tierra":
-                dtCartas = con.SelectTie(nombre);
-                bNombre.setText(dtCartas[0][0].toString());
-                bTipo.setText(dtCartas[0][1].toString());
-                bRareza.setText(dtCartas[0][2].toString());
-                bHabilidad.setText(dtCartas[0][3].toString());
-                bFuerza.setVisible(false);
-                bDefensa.setVisible(false);
-                separador.setVisible(false);
-                bCmc.setVisible(false);
-                bColor.setVisible(false);
-                break;
+        nombre = cBNombre.getSelectedItem().toString();
+        if ("".equals(nombre) || tipo == null) {
+            JOptionPane.showMessageDialog(null,"Los campos Nombre y Tipo son obligatorios.");
+        } else {
+            switch (tipo) {
+                case "Instantaneo":
+                    dtCartas = con.SelectIns(nombre);
+                    if (dtCartas[0][0] != null){
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bFuerza.setVisible(false);
+                        bDefensa.setVisible(false);
+                        separador.setVisible(false);
+                        vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Criatura":
+                    dtCartas = con.SelectCria(nombre);
+                    if (dtCartas[0][0] != null){
+                    bNombre.setText(dtCartas[0][0].toString());
+                    bTipo.setText(dtCartas[0][1].toString());
+                    bRareza.setText(dtCartas[0][2].toString());
+                    bHabilidad.setText(dtCartas[0][3].toString());
+                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                    bColor.setText(dtCartas[0][5].toString());
+                    bFuerza.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
+                    bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][7].toString())));
+                    vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Encantamiento":
+                    dtCartas = con.SelectEnc(nombre);
+                    if (dtCartas[0][0] != null){
+                    bNombre.setText(dtCartas[0][0].toString());
+                    bTipo.setText(dtCartas[0][1].toString());
+                    bRareza.setText(dtCartas[0][2].toString());
+                    bHabilidad.setText(dtCartas[0][3].toString());
+                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                    bColor.setText(dtCartas[0][5].toString());
+                    bFuerza.setVisible(false);
+                    bDefensa.setVisible(false);
+                    separador.setVisible(false);
+                    vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Artefacto":
+                    dtCartas = con.SelectArt(nombre);
+                    if (dtCartas[0][0] != null){
+                    bNombre.setText(dtCartas[0][0].toString());
+                    bTipo.setText(dtCartas[0][1].toString());
+                    bRareza.setText(dtCartas[0][2].toString());
+                    bHabilidad.setText(dtCartas[0][3].toString());
+                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                    bColor.setText(dtCartas[0][5].toString());
+                    bFuerza.setVisible(false);
+                    bDefensa.setVisible(false);
+                    separador.setVisible(false);
+                    vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Conjuro":
+                    dtCartas = con.SelectCon(nombre);
+                    if (dtCartas[0][0] != null){
+                    bNombre.setText(dtCartas[0][0].toString());
+                    bTipo.setText(dtCartas[0][1].toString());
+                    bRareza.setText(dtCartas[0][2].toString());
+                    bHabilidad.setText(dtCartas[0][3].toString());
+                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                    bColor.setText(dtCartas[0][5].toString());
+                    bFuerza.setVisible(false);
+                    bDefensa.setVisible(false);
+                    separador.setVisible(false);
+                    vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Tierra":
+                    dtCartas = con.SelectTie(nombre);
+                    if (dtCartas[0][0] != null){
+                    bNombre.setText(dtCartas[0][0].toString());
+                    bTipo.setText(dtCartas[0][1].toString());
+                    bRareza.setText(dtCartas[0][2].toString());
+                    bHabilidad.setText(dtCartas[0][3].toString());
+                    bFuerza.setVisible(false);
+                    bDefensa.setVisible(false);
+                    separador.setVisible(false);
+                    bCmc.setVisible(false);
+                    bColor.setVisible(false);
+                    vBuscar.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+            }
         }
-
-        vBuscar.setVisible(true);
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAñadirActionPerformed
         nombre = tANombre.getText();
         habilidad = tAhabilidad.getText();
+        boolean ex = false;
         if (tACmc.isEnabled()) {
-            cmc = Integer.parseInt(tACmc.getText());
+            if (tACmc.getText().equalsIgnoreCase("")) {
+                cmc = -1;
+            } else {
+                cmc = Integer.parseInt(tACmc.getText());
+            }
         } else {
             cmc = 0;
         }
-        Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
-        this.cENombre.setModel(con.LlenarComboBox());
-        vAñadir.setVisible(true);
+        dtCartas = con.Select_Cartas();
+        for (int i = 0; i < dtCartas.length; i++) {
+            if (nombre.equalsIgnoreCase(dtCartas[i][0].toString())) {
+                ex = true;
+            }
+        }
+        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1) {
+            JOptionPane.showMessageDialog(null, "Los campos Nombre, Color, Rareza, tipo y Coste de Mana Convertido son obligatorios.");
+        } else {
+            if (ex == true) {
+                JOptionPane.showMessageDialog(null, "No se puede añadir una carta con el mismo nombre que otra ya añadida.");
+            } else {
+                tAñadido.setText("Carta insertada correctamente.");
+                Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+                vAñadir.setVisible(true);
+                this.cENombre.setModel(con.LlenarComboBox());
+                this.cBNombre.setModel(con.LlenarComboBox());
+            }
+        }
+        
     }//GEN-LAST:event_bAñadirActionPerformed
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
@@ -1511,7 +1554,6 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_cADefensaActionPerformed
 
     private void cENombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cENombreActionPerformed
-        
         //actualiza los datos de la tabla realizando una consulta a la base de datos
         String[] columNames = {"Nombre", "Tipo", "Rareza", "Habilidad"};
         dtCartas = con.Select_Cartas();
@@ -1523,15 +1565,38 @@ public class Principal extends javax.swing.JFrame {
     private void bEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEditarActionPerformed
         nombre = tENombre.getText();
         habilidad = tEhabilidad.getText();
+        boolean ex = false;
         if (tECmc.isEnabled()) {
-            cmc = Integer.parseInt(tECmc.getText());
+            if (tECmc.getText().equalsIgnoreCase("")) {
+                cmc = -1;
+            } else {
+                cmc = Integer.parseInt(tECmc.getText());
+            }
         } else {
             cmc = 0;
         }
         nombreViejo = cENombre.getSelectedItem().toString();
-        Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
-        this.cENombre.setModel(con.LlenarComboBox());
-        vEditar.setVisible(true);
+        tipoViejo = cETipo.getSelectedItem().toString();
+        dtCartas = con.Select_Cartas();
+        for (int i = 0; i < dtCartas.length; i++) {
+            if (nombre.equalsIgnoreCase(dtCartas[i][0].toString())) {
+                ex = true;
+            }
+        }
+        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1) {
+            JOptionPane.showMessageDialog(null, "Es necesario completar los campos Nombre, Color, Rareza, Tipo y Coste de Mana Convertido.");
+        } else {
+            if (ex == true && !nombre.equalsIgnoreCase(nombreViejo) ) {
+                JOptionPane.showMessageDialog(null, "No esta permitido cambiar el nombre de la carta por el de otra carta ya existente.");
+            } else {
+                tEAñadido.setText("Carta modificada.");
+                Metodos.editar(nombreViejo,tipoViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+                vEditar.setVisible(true);
+                this.cENombre.setModel(con.LlenarComboBox());
+                this.cBNombre.setModel(con.LlenarComboBox());
+            }
+            
+        }
     }//GEN-LAST:event_bEditarActionPerformed
 
     private void cERarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cERarezaActionPerformed
@@ -1622,37 +1687,90 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_cEDefensaActionPerformed
 
-    private void cBRarezaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBRarezaActionPerformed
-        if (cBRareza.getSelectedIndex() == 1) {
-            rareza = "Comun";
-        } else if (cBRareza.getSelectedIndex() == 2) {
-            rareza = "Infrecuente";
-        } else if (cBRareza.getSelectedIndex() == 3) {
-            rareza = "Rara";
-        } else if (cBRareza.getSelectedIndex() == 4) {
-            rareza = "Rara Mitica";
-        }
-    }//GEN-LAST:event_cBRarezaActionPerformed
-
     private void tACmcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tACmcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tACmcActionPerformed
-
-    private void mVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mVisualizarActionPerformed
-
-    }//GEN-LAST:event_mVisualizarActionPerformed
-
+    private void macercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macercaActionPerformed
+        vAcerca.setVisible(true);
+    }//GEN-LAST:event_macercaActionPerformed
     private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
 
     }//GEN-LAST:event_mSalirActionPerformed
 
-    private void tBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBNombreActionPerformed
+    private void rEAzulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rEAzulActionPerformed
+        if (rEAzul.isSelected() == true) {
+            color = "Azul";
+            rEBlanco.setSelected(false);
+            rENegro.setSelected(false);
+            rEVerde.setSelected(false);
+            rERojo.setSelected(false);
+            rEIncoloro.setSelected(false);
+        }
+    }//GEN-LAST:event_rEAzulActionPerformed
 
-    }//GEN-LAST:event_tBNombreActionPerformed
+    private void rEBlancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rEBlancoActionPerformed
+        if (rEBlanco.isSelected() == true) {
+            color = "Blanco";
+            rEAzul.setSelected(false);
+            rENegro.setSelected(false);
+            rEVerde.setSelected(false);
+            rERojo.setSelected(false);
+            rEIncoloro.setSelected(false);
+        }
+    }//GEN-LAST:event_rEBlancoActionPerformed
 
-    private void macercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_macercaActionPerformed
-        vAcerca.setVisible(true);
-    }//GEN-LAST:event_macercaActionPerformed
+    private void rENegroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rENegroActionPerformed
+        if (rENegro.isSelected() == true) {
+            color = "Negro";
+            rEBlanco.setSelected(false);
+            rEAzul.setSelected(false);
+            rEVerde.setSelected(false);
+            rERojo.setSelected(false);
+            rEIncoloro.setSelected(false);
+        }
+    }//GEN-LAST:event_rENegroActionPerformed
+
+    private void rERojoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rERojoActionPerformed
+        if (rERojo.isSelected() == true) {
+            color = "Rojo";
+            rEBlanco.setSelected(false);
+            rEAzul.setSelected(false);
+            rENegro.setSelected(false);
+            rEIncoloro.setSelected(false);
+            rEVerde.setSelected(false);
+        }
+    }//GEN-LAST:event_rERojoActionPerformed
+
+    private void rEVerdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rEVerdeActionPerformed
+        if (rEVerde.isSelected() == true) {
+            color = "Verde";
+            rEBlanco.setSelected(false);
+            rEAzul.setSelected(false);
+            rENegro.setSelected(false);
+            rERojo.setSelected(false);
+            rEIncoloro.setSelected(false);
+        }
+    }//GEN-LAST:event_rEVerdeActionPerformed
+
+    private void rEIncoloroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rEIncoloroActionPerformed
+        if (rEIncoloro.isSelected() == true) {
+            color = "Incoloro";
+            rEBlanco.setSelected(false);
+            rEAzul.setSelected(false);
+            rENegro.setSelected(false);
+            rERojo.setSelected(false);
+            rEVerde.setSelected(false);
+        }
+    }//GEN-LAST:event_rEIncoloroActionPerformed
+
+    private void cBNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cBNombreActionPerformed
+        //actualiza los datos de la tabla realizando una consulta a la base de datos
+        String[] columNames = {"Nombre", "Tipo", "Rareza", "Habilidad"};
+        dtCartas = con.Select_Cartas();
+        // se colocan los datos en la tabl
+        DefaultTableModel datos = new DefaultTableModel(dtCartas, columNames);
+        tabla.setModel(datos);
+    }//GEN-LAST:event_cBNombreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1706,7 +1824,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JComboBox cAFuerza;
     private javax.swing.JComboBox cARareza;
     private javax.swing.JComboBox cATipo;
-    private javax.swing.JComboBox cBRareza;
+    private javax.swing.JComboBox cBNombre;
     private javax.swing.JComboBox cBTipo;
     private javax.swing.JComboBox cEDefensa;
     private javax.swing.JComboBox cEFuerza;
@@ -1739,11 +1857,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
@@ -1760,11 +1874,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu mArchivo;
     private javax.swing.JMenu mAyuda;
-    private javax.swing.JMenuItem mAñadir;
-    private javax.swing.JMenuItem mBuscar;
-    private javax.swing.JMenuItem mEditar;
     private javax.swing.JMenuItem mSalir;
-    private javax.swing.JMenuItem mVisualizar;
     private javax.swing.JMenuItem macerca;
     private javax.swing.JMenuBar menu;
     private javax.swing.JPanel pAñadir;
@@ -1790,8 +1900,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField tACmc;
     private javax.swing.JTextField tANombre;
     private javax.swing.JTextArea tAhabilidad;
-    private javax.swing.JTextField tBNombre;
-    private javax.swing.JTextField tBhabilidad;
+    private javax.swing.JLabel tAñadido;
+    private javax.swing.JLabel tEAñadido;
     private javax.swing.JTextField tECmc;
     private javax.swing.JTextField tENombre;
     private javax.swing.JTextArea tEhabilidad;

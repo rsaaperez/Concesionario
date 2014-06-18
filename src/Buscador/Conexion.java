@@ -105,25 +105,25 @@ public class Conexion {
         }
         return data;
     }
-    public DefaultComboBoxModel LlenarComboBox()
-    {
-        DefaultComboBoxModel  listmodel = null;
+
+    public DefaultComboBoxModel LlenarComboBox() {
+        DefaultComboBoxModel listmodel = null;
         try {
-            listmodel = new DefaultComboBoxModel ();
-            PreparedStatement pstm = conexion.prepareStatement( " SELECT * FROM cartas " );
+            listmodel = new DefaultComboBoxModel();
+            PreparedStatement pstm = conexion.prepareStatement(" SELECT * FROM cartas ");
             java.sql.ResultSet res = pstm.executeQuery();
             try {
-                while( res.next() ){
-                    listmodel.addElement( res.getString( "nombre" ) );
+                while (res.next()) {
+                    listmodel.addElement(res.getString("nombre"));
                 }
                 res.close();
             } catch (SQLException ex) {
-                System.err.println( "Error consulta :" + ex.getMessage() );
+                System.err.println("Error consulta :" + ex.getMessage());
             }
-        } catch (SQLException ex) {            
-            Logger.getLogger(Conexion.class.getName()).log( Level.SEVERE, null, ex);
-        }        
-       return listmodel;
+        } catch (SQLException ex) {
+            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listmodel;
     }
 
     public void insertar(Cartas c) {
@@ -180,52 +180,25 @@ public class Conexion {
         }
     }
 
-    public Object[][] seleccionarLista() {
-        ResultSet rs = null;
-        try {
-            Statement st = (Statement) conexion.createStatement();
-            rs = (ResultSet) st.executeQuery("SELECT * FROM cartas");
-            st.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return ResultSetToArray(rs);
-        }
-    }
-
-    private Object[][] ResultSetToArray(ResultSet rs) {
-        Object obj[][] = null;
-        int j = 0;
-        try {
-            rs.last();
-            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
-            int numCols = rsmd.getColumnCount();
-            int numFils = rs.getRow();
-            obj = new Object[numFils][numCols];
-            rs.beforeFirst();
-            while (rs.next()) {
-                for (int i = 0; i < numCols; i++) {
-                    obj[j][i] = rs.getObject(i + 1);
-                }
-                j++;
-            }
-        } catch (Exception e) {
-        }
-        return obj;
-    }
-
-    public void editar(Cartas c, String nom) {
+    public void editar(Cartas c, String nom, String tip) {
         String tipo = c.getTipo();
         try {
             switch (tipo) {
                 case "Criatura":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
-                        GetConnection().executeUpdate("UPDATE criatura set nombre='" + c.getNombre() + "', cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "', fuerza=" + c.getFue(c) + ", defensa=" + c.getDef(c) + " WHERE nombre='" + nom + "'");
+                        switch (tip) {
+                            case "Instantaneo":
+                                GetConnection().executeUpdate("Delete from criatura where nombre ='" + c.getNombre() + "'");
+                                GetConnection().executeUpdate("INSERT INTO Instantaneo values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
+                                break;
+                        }
+
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
+
                 case "Artefacto":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
@@ -236,7 +209,7 @@ public class Conexion {
                     break;
                 case "Conjuro":
                     try {
-                       GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
+                        GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
                         GetConnection().executeUpdate("UPDATE conjuro set nombre='" + c.getNombre() + "',cmc=" + c.getCoste(c) + ", color='" + c.getCol(c) + "' WHERE nombre='" + nom + "'");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -260,28 +233,16 @@ public class Conexion {
                     break;
                 case "Tierra":
                     GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
-                        GetConnection().executeUpdate("UPDATE tierra set nombre='" + c.getNombre() + "' WHERE nombre='" + nom + "'");
+                    GetConnection().executeUpdate("UPDATE tierra set nombre='" + c.getNombre() + "' WHERE nombre='" + nom + "'");
                     break;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ResultSet seleccionarCarta(String nom) {
-        java.sql.ResultSet res = null;
-        try {
-            PreparedStatement pstm = conexion.prepareStatement( " SELECT * FROM cartas where nombre = '"+nom+"' " );
-            res = (ResultSet) pstm.executeQuery();
-            res.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            return (ResultSet) res;
-            
-        }
-    }
+
     public Object[][] SelectIns(String nom) {
-        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,instantaneo.cmc,instantaneo.color FROM cartas,instantaneo where cartas.nombre='"+nom+"' and instantaneo.nombre='"+nom+"'";
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,instantaneo.cmc,instantaneo.color FROM cartas,instantaneo where cartas.nombre='" + nom + "' and instantaneo.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][6];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -304,7 +265,7 @@ public class Conexion {
     }
 
     public Object[][] SelectCria(String nom) {
-        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,criatura.cmc,criatura.color, criatura.fuerza, criatura.defensa FROM cartas,criatura where cartas.nombre='"+nom+"' and criatura.nombre='"+nom+"'";
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,criatura.cmc,criatura.color, criatura.fuerza, criatura.defensa FROM cartas,criatura where cartas.nombre='" + nom + "' and criatura.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][8];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -329,7 +290,7 @@ public class Conexion {
     }
 
     public Object[][] SelectEnc(String nom) {
-        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,encantamiento.cmc,encantamiento.color FROM cartas,encantamiento where cartas.nombre='"+nom+"' and encantamiento.nombre='"+nom+"'";
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,encantamiento.cmc,encantamiento.color FROM cartas,encantamiento where cartas.nombre='" + nom + "' and encantamiento.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][6];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -352,7 +313,7 @@ public class Conexion {
     }
 
     public Object[][] SelectArt(String nom) {
-        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,artefacto.cmc,artefacto.color FROM cartas,artefacto where cartas.nombre='"+nom+"' and artefacto.nombre='"+nom+"'";
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,artefacto.cmc,artefacto.color FROM cartas,artefacto where cartas.nombre='" + nom + "' and artefacto.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][6];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -375,7 +336,7 @@ public class Conexion {
     }
 
     public Object[][] SelectCon(String nom) {
-        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,conjuro.cmc,conjuro.color FROM cartas,conjuro where cartas.nombre='"+nom+"' and conjuro.nombre='"+nom+"'";
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,conjuro.cmc,conjuro.color FROM cartas,conjuro where cartas.nombre='" + nom + "' and conjuro.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][6];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
@@ -398,7 +359,7 @@ public class Conexion {
     }
 
     public Object[][] SelectTie(String nom) {
-        String consulta = "Select nombre,tipo,rareza,habilidad FROM cartas where nombre='"+nom+"'";
+        String consulta = "Select nombre,tipo,rareza,habilidad FROM cartas where nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite
         Object[][] data = new String[1][4];
         //realizamos la consulta sql y llenamos los datos en la matriz "Object"
