@@ -71,8 +71,8 @@ public class Principal extends javax.swing.JFrame {
         vEditar = new javax.swing.JDialog();
         tEAñadido = new javax.swing.JLabel();
         vAcerca = new javax.swing.JDialog();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
         pInicial = new javax.swing.JPanel();
         paneles = new javax.swing.JTabbedPane();
         pPrincipal = new javax.swing.JPanel();
@@ -292,31 +292,31 @@ public class Principal extends javax.swing.JFrame {
         vAcerca.setIconImage(null);
         vAcerca.setMinimumSize(new java.awt.Dimension(412, 313));
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(102, 102, 102));
-        jTextArea1.setColumns(20);
-        jTextArea1.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
-        jTextArea1.setForeground(new java.awt.Color(0, 0, 153));
-        jTextArea1.setRows(5);
-        jTextArea1.setText("\n\tBuscadorMTG v1.0\n\t\nDesarroyadores:\n\nYago Casal Quintas.\nMiguel Angel Perez Silva.\nRaul Saa Perez.\n\n\n\n\nCopyright all right reserved to Project666 Entertiment\n\n");
-        jTextArea1.setAutoscrolls(false);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 153)));
-        jScrollPane2.setViewportView(jTextArea1);
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Proyect666.gif"))); // NOI18N
+
+        jLabel29.setFont(new java.awt.Font("Arial", 1, 8)); // NOI18N
+        jLabel29.setText("Proyect 666 Entertainmet ®");
 
         javax.swing.GroupLayout vAcercaLayout = new javax.swing.GroupLayout(vAcerca.getContentPane());
         vAcerca.getContentPane().setLayout(vAcercaLayout);
         vAcercaLayout.setHorizontalGroup(
             vAcercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vAcercaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vAcercaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel29)
                 .addContainerGap())
+            .addGroup(vAcercaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel13)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         vAcercaLayout.setVerticalGroup(
             vAcercaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vAcercaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(jLabel29)
                 .addContainerGap())
         );
 
@@ -1838,6 +1838,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1854,6 +1855,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -1864,11 +1866,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JMenu mArchivo;
     private javax.swing.JMenu mAyuda;
     private javax.swing.JMenuItem mSalir;
