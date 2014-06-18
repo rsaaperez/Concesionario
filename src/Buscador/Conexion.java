@@ -187,11 +187,13 @@ public class Conexion {
                 case "Criatura":
                     try {
                         GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from instantaneo where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from criatura where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");
-                        //if ("Instantaneo".equalsIgnoreCase(tip)) {
-                            GetConnection().executeUpdate("Delete from instantaneo where nombre ='" + c.getNombre() + "'");
-                        //}
-
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
