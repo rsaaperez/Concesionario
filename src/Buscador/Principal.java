@@ -159,7 +159,6 @@ public class Principal extends javax.swing.JFrame {
 
         vBuscar.setIconImage(getIconImage());
         vBuscar.setMinimumSize(new java.awt.Dimension(535, 350));
-        vBuscar.setPreferredSize(new java.awt.Dimension(535, 3350));
 
         bDefensa.setText("Def");
 
@@ -246,7 +245,6 @@ public class Principal extends javax.swing.JFrame {
 
         vAñadir.setIconImage(getIconImage());
         vAñadir.setMinimumSize(new java.awt.Dimension(357, 100));
-        vAñadir.setPreferredSize(new java.awt.Dimension(357, 100));
 
         tAñadido.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
         tAñadido.setText("Carta insertada correctamente.");
@@ -270,7 +268,6 @@ public class Principal extends javax.swing.JFrame {
 
         vEditar.setIconImage(getIconImage());
         vEditar.setMinimumSize(new java.awt.Dimension(220, 100));
-        vEditar.setPreferredSize(new java.awt.Dimension(220, 100));
 
         tEAñadido.setFont(new java.awt.Font("Magic:the Gathering", 0, 24)); // NOI18N
         tEAñadido.setText("Carta modificada.");
@@ -931,11 +928,12 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jLabel19))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(cETipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18)
-                            .addComponent(cERareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cERareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel17)
+                                .addComponent(cETipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel18)))
                         .addGap(21, 21, 21)
                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
@@ -1576,7 +1574,6 @@ public class Principal extends javax.swing.JFrame {
             cmc = 0;
         }
         nombreViejo = cENombre.getSelectedItem().toString();
-        tipoViejo = cETipo.getSelectedItem().toString();
         dtCartas = con.Select_Cartas();
         for (int i = 0; i < dtCartas.length; i++) {
             if (nombre.equalsIgnoreCase(dtCartas[i][0].toString())) {
@@ -1590,7 +1587,7 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No esta permitido cambiar el nombre de la carta por el de otra carta ya existente.");
             } else {
                 tEAñadido.setText("Carta modificada.");
-                Metodos.editar(nombreViejo,tipoViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+                Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
                 vEditar.setVisible(true);
                 this.cENombre.setModel(con.LlenarComboBox());
                 this.cBNombre.setModel(con.LlenarComboBox());
