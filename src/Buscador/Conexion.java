@@ -6,8 +6,6 @@ package Buscador;
 
 import Objetos.*;
 import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.ResultSet;
-import com.mysql.jdbc.ResultSetMetaData;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -170,6 +168,14 @@ public class Conexion {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     break;
+                case "Planeswalker":
+                    try {
+                        GetConnection().executeUpdate("Insert Into cartas Values ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
+                        GetConnection().executeUpdate("INSERT INTO planeswalker values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getLeal(c) + ")");
+                    } catch (SecurityException ex) {
+                        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
                 case "Tierra":
                     GetConnection().executeUpdate("INSERT INTO cartas VALUES ('" + c.getNombre() + "', '" + c.getTipo() + "', '" + c.getRareza() + "', '" + c.getHabilidad() + "')");
                     GetConnection().executeUpdate("INSERT INTO Tierra VALUES ('" + c.getNombre() + "')");
@@ -192,8 +198,24 @@ public class Conexion {
                         GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO criatura values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getFue(c) + ", " + c.getDef(c) + ")");
+                    } catch (SecurityException ex) {
+                        Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    break;
+                case "Planeswalker":
+                    try {
+                        GetConnection().executeUpdate("UPDATE cartas set nombre='" + c.getNombre() + "', tipo='" + c.getTipo() + "', rareza='" + c.getRareza() + "', habilidad='" + c.getHabilidad() + "' WHERE nombre='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from instantaneo where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from criatura where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("INSERT INTO planeswalker values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "', " + c.getLeal(c) + ")");
                     } catch (SecurityException ex) {
                         Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -207,6 +229,7 @@ public class Conexion {
                         GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO artefacto values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
@@ -221,6 +244,7 @@ public class Conexion {
                         GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO conjuro values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
@@ -235,6 +259,7 @@ public class Conexion {
                         GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO encantamiento values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
@@ -249,6 +274,7 @@ public class Conexion {
                         GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                        GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                         GetConnection().executeUpdate("INSERT INTO instantaneo values ('" + c.getNombre() + "', " + c.getCoste(c) + ", '" + c.getCol(c) + "')");
                     } catch (SecurityException ex) {
@@ -262,6 +288,7 @@ public class Conexion {
                     GetConnection().executeUpdate("Delete from encantamiento where nombre ='" + nom + "'");
                     GetConnection().executeUpdate("Delete from conjuro where nombre ='" + nom + "'");
                     GetConnection().executeUpdate("Delete from artefacto where nombre ='" + nom + "'");
+                    GetConnection().executeUpdate("Delete from planeswalker where nombre ='" + nom + "'");
                     GetConnection().executeUpdate("Delete from tierra where nombre ='" + nom + "'");
                     GetConnection().executeUpdate("INSERT INTO tierra values ('" + c.getNombre() + "')");
                     break;
@@ -293,7 +320,29 @@ public class Conexion {
         }
         return data;
     }
-
+    public Object[][] SelectPlanes(String nom) {
+        String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,planeswalker.cmc,planeswalker.color, planeswalker.lealtad FROM cartas,planeswalker where cartas.nombre='" + nom + "' and planeswalker.nombre='" + nom + "'";
+        //se crea una matriz con tantas filas y columnas que necesite
+        Object[][] data = new String[1][7];
+        //realizamos la consulta sql y llenamos los datos en la matriz "Object"
+        try {
+            PreparedStatement pstm = conexion.prepareStatement(consulta);
+            java.sql.ResultSet res = pstm.executeQuery();
+            while (res.next()) {
+                data[0][0] = res.getString("nombre");
+                data[0][1] = res.getString("tipo");
+                data[0][2] = res.getString("rareza");
+                data[0][3] = res.getString("habilidad");
+                data[0][4] = res.getString("cmc");
+                data[0][5] = res.getString("color");
+                data[0][6] = res.getString("lealtad");
+            }
+            res.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return data;
+    }
     public Object[][] SelectCria(String nom) {
         String consulta = "Select cartas.nombre,cartas.tipo,cartas.rareza,cartas.habilidad,criatura.cmc,criatura.color, criatura.fuerza, criatura.defensa FROM cartas,criatura where cartas.nombre='" + nom + "' and criatura.nombre='" + nom + "'";
         //se crea una matriz con tantas filas y columnas que necesite

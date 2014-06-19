@@ -21,7 +21,7 @@ public class Principal extends javax.swing.JFrame {
     private Conexion con = new Conexion();
     private Metodos met = new Metodos();
     private String nombre = null, color = null, rareza = null, habilidad = null, tipo = null, nombreViejo = null, tipoViejo = null;
-    private int cmc = 0, fuerza = -1, defensa = -1;
+    private int cmc = 0, fuerza = -1, defensa = -1, lealtad = 0;
     private Object[][] dtCartas;
 
     //Añade icono al jframe
@@ -41,8 +41,6 @@ public class Principal extends javax.swing.JFrame {
         con.GetConnection();
         this.cENombre.setModel(con.LlenarComboBox());
         this.cBNombre.setModel(con.LlenarComboBox());
-        //dtCartas=con.SelectIns("4");
-        //System.out.println(dtCartas[0][1].toString());
     }
 
     /**
@@ -113,6 +111,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         tAhabilidad = new javax.swing.JTextArea();
+        eALealtad = new javax.swing.JLabel();
+        tALealtad = new javax.swing.JTextField();
         pEditar = new javax.swing.JPanel();
         bEditar = new javax.swing.JButton();
         cEDefensa = new javax.swing.JComboBox();
@@ -142,6 +142,8 @@ public class Principal extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tEhabilidad = new javax.swing.JTextArea();
+        tELealtad = new javax.swing.JTextField();
+        eELealtad = new javax.swing.JLabel();
         pBuscar = new javax.swing.JPanel();
         bBuscar = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
@@ -204,7 +206,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vBuscarLayout.createSequentialGroup()
-                                .addComponent(bTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(bTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(vBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(vBuscarLayout.createSequentialGroup()
@@ -289,8 +291,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        vAcerca.setIconImage(null);
-        vAcerca.setMinimumSize(new java.awt.Dimension(412, 313));
+        vAcerca.setIconImage(getIconImage());
+        vAcerca.setMinimumSize(new java.awt.Dimension(412, 413));
+        vAcerca.setPreferredSize(new java.awt.Dimension(399, 400));
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Proyect666.gif"))); // NOI18N
 
@@ -323,15 +326,15 @@ public class Principal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("BuscadorMTG");
         setIconImage(getIconImage());
-        setMinimumSize(new java.awt.Dimension(700, 525));
-        setPreferredSize(new java.awt.Dimension(700, 525));
+        setMinimumSize(new java.awt.Dimension(750, 550));
+        setPreferredSize(new java.awt.Dimension(750, 550));
         setResizable(false);
 
-        pInicial.setMinimumSize(new java.awt.Dimension(700, 680));
-        pInicial.setPreferredSize(new java.awt.Dimension(700, 680));
+        pInicial.setMinimumSize(new java.awt.Dimension(750, 680));
+        pInicial.setPreferredSize(new java.awt.Dimension(750, 680));
 
-        paneles.setMinimumSize(new java.awt.Dimension(700, 680));
-        paneles.setPreferredSize(new java.awt.Dimension(700, 680));
+        paneles.setMinimumSize(new java.awt.Dimension(750, 680));
+        paneles.setPreferredSize(new java.awt.Dimension(750, 680));
 
         pPrincipal.setMinimumSize(new java.awt.Dimension(670, 670));
         pPrincipal.setPreferredSize(new java.awt.Dimension(670, 670));
@@ -352,31 +355,32 @@ public class Principal extends javax.swing.JFrame {
         pPrincipalLayout.setHorizontalGroup(
             pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pPrincipalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel15))
-                    .addGroup(pPrincipalLayout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jLabel11))
-                    .addGroup(pPrincipalLayout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jLabel34)))
-                .addGap(102, 102, 102))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
-                .addComponent(jLabel35)
-                .addGap(177, 177, 177))
+                        .addComponent(jLabel15)
+                        .addGap(419, 419, 419))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
+                        .addGroup(pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pPrincipalLayout.createSequentialGroup()
+                                .addGap(135, 135, 135)
+                                .addComponent(jLabel11))
+                            .addComponent(jLabel34)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pPrincipalLayout.createSequentialGroup()
+                                .addComponent(jLabel35)
+                                .addGap(75, 75, 75)))
+                        .addGap(125, 125, 125))))
         );
         pPrincipalLayout.setVerticalGroup(
             pPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pPrincipalLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(32, 32, 32)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel35)
-                .addGap(74, 74, 74)
+                .addGap(65, 65, 65)
                 .addComponent(jLabel15)
                 .addContainerGap(264, Short.MAX_VALUE))
         );
@@ -417,17 +421,21 @@ public class Principal extends javax.swing.JFrame {
         pVisualizarLayout.setHorizontalGroup(
             pVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pVisualizarLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
                 .addGroup(pVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
                     .addGroup(pVisualizarLayout.createSequentialGroup()
-                        .addGap(251, 251, 251)
-                        .addComponent(bVisualizar)))
-                .addContainerGap(236, Short.MAX_VALUE))
-            .addGroup(pVisualizarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 675, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE))
+                    .addGroup(pVisualizarLayout.createSequentialGroup()
+                        .addGroup(pVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pVisualizarLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addGroup(pVisualizarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)))
+                            .addGroup(pVisualizarLayout.createSequentialGroup()
+                                .addGap(313, 313, 313)
+                                .addComponent(bVisualizar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pVisualizarLayout.setVerticalGroup(
@@ -437,9 +445,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(bVisualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bVisualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(271, 271, 271))
         );
@@ -509,7 +517,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel9.setText("Rareza:");
 
-        cATipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra" }));
+        cATipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra", "Planeswalker" }));
         cATipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cATipoActionPerformed(evt);
@@ -573,11 +581,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner2.jpg"))); // NOI18N
 
         tAhabilidad.setColumns(20);
-        tAhabilidad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+        tAhabilidad.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tAhabilidad.setRows(5);
         tAhabilidad.setMaximumSize(new java.awt.Dimension(164, 94));
         tAhabilidad.setMinimumSize(new java.awt.Dimension(164, 94));
         jScrollPane4.setViewportView(tAhabilidad);
+
+        eALealtad.setText("Lealtad: ");
+        eALealtad.setEnabled(false);
+
+        tALealtad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+        tALealtad.setEnabled(false);
 
         javax.swing.GroupLayout pAñadirLayout = new javax.swing.GroupLayout(pAñadir);
         pAñadir.setLayout(pAñadirLayout);
@@ -586,7 +600,9 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(pAñadirLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
+                    .addGroup(pAñadirLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addContainerGap(287, Short.MAX_VALUE))
                     .addGroup(pAñadirLayout.createSequentialGroup()
                         .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bAñadir)
@@ -617,11 +633,13 @@ public class Principal extends javax.swing.JFrame {
                                     .addGroup(pAñadirLayout.createSequentialGroup()
                                         .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(eAFuerza)
-                                            .addComponent(eADefensa))
+                                            .addComponent(eADefensa)
+                                            .addComponent(eALealtad))
                                         .addGap(23, 23, 23)
                                         .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(cADefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cAFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(cAFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(tALealtad, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pAñadirLayout.createSequentialGroup()
                                             .addComponent(eACmc)
@@ -636,9 +654,9 @@ public class Principal extends javax.swing.JFrame {
                                             .addComponent(jLabel7)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(jScrollPane4))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)))
-                .addContainerGap(22, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addGap(63, 63, 63))))
         );
         pAñadirLayout.setVerticalGroup(
             pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,8 +715,15 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(eADefensa)
                                     .addComponent(cADefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(40, 40, 40)
-                        .addComponent(bAñadir))
+                        .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pAñadirLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(pAñadirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(eALealtad)
+                                    .addComponent(tALealtad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(pAñadirLayout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(bAñadir))))
                     .addComponent(jLabel14))
                 .addContainerGap(259, Short.MAX_VALUE))
         );
@@ -745,7 +770,7 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel17.setText("Tipo:");
 
-        cETipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra" }));
+        cETipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra", "Planeswalker" }));
         cETipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cETipoActionPerformed(evt);
@@ -835,11 +860,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/banner1.jpg"))); // NOI18N
 
         tEhabilidad.setColumns(20);
-        tEhabilidad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+        tEhabilidad.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tEhabilidad.setRows(5);
         tEhabilidad.setMaximumSize(new java.awt.Dimension(164, 94));
         tEhabilidad.setMinimumSize(new java.awt.Dimension(164, 94));
         jScrollPane5.setViewportView(tEhabilidad);
+
+        tELealtad.setFont(new java.awt.Font("Magic:the Gathering", 0, 16)); // NOI18N
+        tELealtad.setEnabled(false);
+
+        eELealtad.setText("Lealtad: ");
+        eELealtad.setEnabled(false);
 
         javax.swing.GroupLayout pEditarLayout = new javax.swing.GroupLayout(pEditar);
         pEditar.setLayout(pEditarLayout);
@@ -854,6 +885,18 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(pEditarLayout.createSequentialGroup()
                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel21)
+                            .addGroup(pEditarLayout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel19)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pEditarLayout.createSequentialGroup()
+                                .addComponent(jLabel23)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(pEditarLayout.createSequentialGroup()
                                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pEditarLayout.createSequentialGroup()
@@ -870,7 +913,8 @@ public class Principal extends javax.swing.JFrame {
                                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(rERojo)
                                             .addComponent(rEIncoloro)
-                                            .addComponent(rEVerde))))
+                                            .addComponent(rEVerde)))
+                                    .addComponent(bEditar))
                                 .addGap(18, 18, 18)
                                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pEditarLayout.createSequentialGroup()
@@ -878,34 +922,27 @@ public class Principal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(cERareza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(pEditarLayout.createSequentialGroup()
-                                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(eEFuerza)
-                                            .addComponent(eEDefensa))
-                                        .addGap(23, 23, 23)
-                                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cEDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cEFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(pEditarLayout.createSequentialGroup()
                                         .addComponent(eECmc)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(bEditar)
-                            .addGroup(pEditarLayout.createSequentialGroup()
-                                .addComponent(jLabel20)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel19)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pEditarLayout.createSequentialGroup()
-                                .addComponent(jLabel23)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cENombre, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(pEditarLayout.createSequentialGroup()
+                                        .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pEditarLayout.createSequentialGroup()
+                                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(eEFuerza)
+                                                    .addComponent(eEDefensa))
+                                                .addGap(23, 23, 23)
+                                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(cEDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(cEFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addGroup(pEditarLayout.createSequentialGroup()
+                                                .addComponent(eELealtad)
+                                                .addGap(23, 23, 23)
+                                                .addComponent(tELealtad, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addComponent(jLabel10)
-                        .addGap(50, 50, 50))))
+                        .addGap(77, 77, 77))))
         );
         pEditarLayout.setVerticalGroup(
             pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -913,9 +950,9 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel21)
                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pEditarLayout.createSequentialGroup()
-                        .addComponent(jLabel21)
                         .addGap(18, 18, 18)
                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
@@ -941,15 +978,6 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(tECmc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pEditarLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(eEFuerza)
-                                    .addComponent(cEFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(21, 21, 21)
-                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(eEDefensa)
-                                    .addComponent(cEDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pEditarLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(rEAzul)
@@ -961,11 +989,26 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(rENegro)
-                                    .addComponent(rEIncoloro))))
-                        .addGap(18, 18, 18)
-                        .addComponent(bEditar))
-                    .addComponent(jLabel10))
-                .addContainerGap(288, Short.MAX_VALUE))
+                                    .addComponent(rEIncoloro))
+                                .addGap(18, 18, 18)
+                                .addComponent(bEditar))
+                            .addGroup(pEditarLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(eEFuerza)
+                                    .addComponent(cEFuerza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(eEDefensa)
+                                    .addComponent(cEDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(21, 21, 21)
+                                .addGroup(pEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(eELealtad)
+                                    .addComponent(tELealtad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(pEditarLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel10)))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         paneles.addTab("Editar carta", pEditar);
@@ -988,14 +1031,14 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel28.setText("En esta pestaña puedes buscar una carta de nuestra base de datos, para ello cubre el");
 
-        cBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra" }));
+        cBTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecciona un tipo", "Artefacto", "Criatura", "Conjuro", "Encantamiento", "Instantaneo", "Tierra", "Planeswalker" }));
         cBTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cBTipoActionPerformed(evt);
             }
         });
 
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner-Magic_the_Gathering.jpg"))); // NOI18N
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cmd1.jpg"))); // NOI18N
 
         cBNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1008,7 +1051,7 @@ public class Principal extends javax.swing.JFrame {
         pBuscarLayout.setHorizontalGroup(
             pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pBuscarLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(87, 87, 87)
                 .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel28)
                     .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1018,14 +1061,14 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel26)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 494, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24)
                             .addGroup(pBuscarLayout.createSequentialGroup()
                                 .addComponent(cBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(28, 28, 28)
                                 .addComponent(jLabel25)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cBTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(20, 132, Short.MAX_VALUE))
+                .addContainerGap(157, Short.MAX_VALUE))
         );
         pBuscarLayout.setVerticalGroup(
             pBuscarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1042,9 +1085,9 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(cBNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(40, 40, 40)
                 .addComponent(bBuscar)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         paneles.addTab("Buscar carta", pBuscar);
@@ -1133,6 +1176,8 @@ public class Principal extends javax.swing.JFrame {
             tipo = "Instantaneo";
         } else if (cBTipo.getSelectedIndex() == 6) {
             tipo = "Tierra";
+        } else if (cBTipo.getSelectedIndex() == 7) {
+            tipo = "Planeswalker";
         }
     }//GEN-LAST:event_cBTipoActionPerformed
 
@@ -1144,6 +1189,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eECmc.setEnabled(false);
             tECmc.setEnabled(false);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
         } else if (cETipo.getSelectedIndex() == 1) {
             eEFuerza.setEnabled(false);
             cEFuerza.setEnabled(false);
@@ -1151,6 +1198,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eECmc.setEnabled(true);
             tECmc.setEnabled(true);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Artefacto";
         } else if (cETipo.getSelectedIndex() == 2) {
             eEFuerza.setEnabled(true);
@@ -1159,6 +1208,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(true);
             eECmc.setEnabled(true);
             tECmc.setEnabled(true);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Criatura";
         } else if (cETipo.getSelectedIndex() == 3) {
             eEFuerza.setEnabled(false);
@@ -1167,6 +1218,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eECmc.setEnabled(true);
             tECmc.setEnabled(true);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Conjuro";
         } else if (cETipo.getSelectedIndex() == 4) {
             eEFuerza.setEnabled(false);
@@ -1175,6 +1228,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eECmc.setEnabled(true);
             tECmc.setEnabled(true);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Encantamiento";
         } else if (cETipo.getSelectedIndex() == 5) {
             eEFuerza.setEnabled(false);
@@ -1183,6 +1238,8 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eECmc.setEnabled(true);
             tECmc.setEnabled(true);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Instantaneo";
         } else if (cETipo.getSelectedIndex() == 6) {
             eEFuerza.setEnabled(false);
@@ -1191,7 +1248,19 @@ public class Principal extends javax.swing.JFrame {
             cEDefensa.setEnabled(false);
             eACmc.setEnabled(false);
             tACmc.setEnabled(false);
+            eELealtad.setEnabled(false);
+            tELealtad.setEnabled(false);
             tipo = "Tierra";
+        } else if (cETipo.getSelectedIndex() == 7) {
+            eEFuerza.setEnabled(false);
+            cEFuerza.setEnabled(false);
+            eEDefensa.setEnabled(false);
+            cEDefensa.setEnabled(false);
+            eECmc.setEnabled(true);
+            tECmc.setEnabled(true);
+            eELealtad.setEnabled(true);
+            tELealtad.setEnabled(true);
+            tipo = "Planeswalker";
         }
     }//GEN-LAST:event_cETipoActionPerformed
 
@@ -1251,18 +1320,28 @@ public class Principal extends javax.swing.JFrame {
             eACmc.setEnabled(false);
             tACmc.setEnabled(false);
             tipo = "Tierra";
+        } else if (cATipo.getSelectedIndex() == 7) {
+            eAFuerza.setEnabled(false);
+            cAFuerza.setEnabled(false);
+            eADefensa.setEnabled(false);
+            cADefensa.setEnabled(false);
+            eACmc.setEnabled(true);
+            tACmc.setEnabled(true);
+            eALealtad.setEnabled(true);
+            tALealtad.setEnabled(true);
+            tipo = "Planeswalker";
         }
     }//GEN-LAST:event_cATipoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         nombre = cBNombre.getSelectedItem().toString();
         if ("".equals(nombre) || tipo == null) {
-            JOptionPane.showMessageDialog(null,"Los campos Nombre y Tipo son obligatorios.");
+            JOptionPane.showMessageDialog(null, "Los campos Nombre y Tipo son obligatorios.");
         } else {
             switch (tipo) {
                 case "Instantaneo":
                     dtCartas = con.SelectIns(nombre);
-                    if (dtCartas[0][0] != null){
+                    if (dtCartas[0][0] != null) {
                         bNombre.setText(dtCartas[0][0].toString());
                         bTipo.setText(dtCartas[0][1].toString());
                         bRareza.setText(dtCartas[0][2].toString());
@@ -1273,91 +1352,108 @@ public class Principal extends javax.swing.JFrame {
                         bDefensa.setVisible(false);
                         separador.setVisible(false);
                         vBuscar.setVisible(true);
-                    }else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
                 case "Criatura":
                     dtCartas = con.SelectCria(nombre);
-                    if (dtCartas[0][0] != null){
-                    bNombre.setText(dtCartas[0][0].toString());
-                    bTipo.setText(dtCartas[0][1].toString());
-                    bRareza.setText(dtCartas[0][2].toString());
-                    bHabilidad.setText(dtCartas[0][3].toString());
-                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                    bColor.setText(dtCartas[0][5].toString());
-                    bFuerza.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
-                    bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][7].toString())));
-                    vBuscar.setVisible(true);
-                    }else{
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bFuerza.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
+                        bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][7].toString())));
+                        vBuscar.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
+                    }
+                    break;
+                case "Planeswalker":
+                    dtCartas = con.SelectPlanes(nombre);
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bDefensa.setText(Integer.toString(Integer.parseInt(dtCartas[0][6].toString())));
+                        bFuerza.setVisible(false);
+                        separador.setVisible(false);
+                        vBuscar.setVisible(true);
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
                 case "Encantamiento":
                     dtCartas = con.SelectEnc(nombre);
-                    if (dtCartas[0][0] != null){
-                    bNombre.setText(dtCartas[0][0].toString());
-                    bTipo.setText(dtCartas[0][1].toString());
-                    bRareza.setText(dtCartas[0][2].toString());
-                    bHabilidad.setText(dtCartas[0][3].toString());
-                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                    bColor.setText(dtCartas[0][5].toString());
-                    bFuerza.setVisible(false);
-                    bDefensa.setVisible(false);
-                    separador.setVisible(false);
-                    vBuscar.setVisible(true);
-                    }else{
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bFuerza.setVisible(false);
+                        bDefensa.setVisible(false);
+                        separador.setVisible(false);
+                        vBuscar.setVisible(true);
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
                 case "Artefacto":
                     dtCartas = con.SelectArt(nombre);
-                    if (dtCartas[0][0] != null){
-                    bNombre.setText(dtCartas[0][0].toString());
-                    bTipo.setText(dtCartas[0][1].toString());
-                    bRareza.setText(dtCartas[0][2].toString());
-                    bHabilidad.setText(dtCartas[0][3].toString());
-                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                    bColor.setText(dtCartas[0][5].toString());
-                    bFuerza.setVisible(false);
-                    bDefensa.setVisible(false);
-                    separador.setVisible(false);
-                    vBuscar.setVisible(true);
-                    }else{
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bFuerza.setVisible(false);
+                        bDefensa.setVisible(false);
+                        separador.setVisible(false);
+                        vBuscar.setVisible(true);
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
                 case "Conjuro":
                     dtCartas = con.SelectCon(nombre);
-                    if (dtCartas[0][0] != null){
-                    bNombre.setText(dtCartas[0][0].toString());
-                    bTipo.setText(dtCartas[0][1].toString());
-                    bRareza.setText(dtCartas[0][2].toString());
-                    bHabilidad.setText(dtCartas[0][3].toString());
-                    bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
-                    bColor.setText(dtCartas[0][5].toString());
-                    bFuerza.setVisible(false);
-                    bDefensa.setVisible(false);
-                    separador.setVisible(false);
-                    vBuscar.setVisible(true);
-                    }else{
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bCmc.setText(Integer.toString(Integer.parseInt(dtCartas[0][4].toString())));
+                        bColor.setText(dtCartas[0][5].toString());
+                        bFuerza.setVisible(false);
+                        bDefensa.setVisible(false);
+                        separador.setVisible(false);
+                        vBuscar.setVisible(true);
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
                 case "Tierra":
                     dtCartas = con.SelectTie(nombre);
-                    if (dtCartas[0][0] != null){
-                    bNombre.setText(dtCartas[0][0].toString());
-                    bTipo.setText(dtCartas[0][1].toString());
-                    bRareza.setText(dtCartas[0][2].toString());
-                    bHabilidad.setText(dtCartas[0][3].toString());
-                    bFuerza.setVisible(false);
-                    bDefensa.setVisible(false);
-                    separador.setVisible(false);
-                    bCmc.setVisible(false);
-                    bColor.setVisible(false);
-                    vBuscar.setVisible(true);
-                    }else{
+                    if (dtCartas[0][0] != null) {
+                        bNombre.setText(dtCartas[0][0].toString());
+                        bTipo.setText(dtCartas[0][1].toString());
+                        bRareza.setText(dtCartas[0][2].toString());
+                        bHabilidad.setText(dtCartas[0][3].toString());
+                        bFuerza.setVisible(false);
+                        bDefensa.setVisible(false);
+                        separador.setVisible(false);
+                        bCmc.setVisible(false);
+                        bColor.setVisible(false);
+                        vBuscar.setVisible(true);
+                    } else {
                         JOptionPane.showMessageDialog(null, "La carta indicada no se encuentra en nuestra base de datos");
                     }
                     break;
@@ -1378,26 +1474,35 @@ public class Principal extends javax.swing.JFrame {
         } else {
             cmc = 0;
         }
+        if (tALealtad.isEnabled()) {
+            if (tALealtad.getText().equalsIgnoreCase("")) {
+                lealtad = -1;
+            } else {
+                lealtad = Integer.parseInt(tALealtad.getText());
+            }
+        } else {
+            lealtad = 0;
+        }
         dtCartas = con.Select_Cartas();
         for (int i = 0; i < dtCartas.length; i++) {
             if (nombre.equalsIgnoreCase(dtCartas[i][0].toString())) {
                 ex = true;
             }
         }
-        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1) {
+        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1 || lealtad == -1) {
             JOptionPane.showMessageDialog(null, "Los campos Nombre, Color, Rareza, tipo y Coste de Mana Convertido son obligatorios.");
         } else {
             if (ex == true) {
                 JOptionPane.showMessageDialog(null, "No se puede añadir una carta con el mismo nombre que otra ya añadida.");
             } else {
                 tAñadido.setText("Carta insertada correctamente.");
-                Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+                Metodos.insertar(nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa, lealtad);
                 vAñadir.setVisible(true);
                 this.cENombre.setModel(con.LlenarComboBox());
                 this.cBNombre.setModel(con.LlenarComboBox());
             }
         }
-        
+
     }//GEN-LAST:event_bAñadirActionPerformed
 
     private void bVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bVisualizarActionPerformed
@@ -1570,6 +1675,15 @@ public class Principal extends javax.swing.JFrame {
             } else {
                 cmc = Integer.parseInt(tECmc.getText());
             }
+            if (tELealtad.isEnabled()) {
+                if (tELealtad.getText().equalsIgnoreCase("")) {
+                    lealtad = -1;
+                } else {
+                    lealtad = Integer.parseInt(tELealtad.getText());
+                }
+            } else {
+                lealtad = 0;
+            }
         } else {
             cmc = 0;
         }
@@ -1580,19 +1694,19 @@ public class Principal extends javax.swing.JFrame {
                 ex = true;
             }
         }
-        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1) {
+        if ("".equals(nombre) || color == null || rareza == null || tipo == null || cmc == -1 || lealtad == -1) {
             JOptionPane.showMessageDialog(null, "Es necesario completar los campos Nombre, Color, Rareza, Tipo y Coste de Mana Convertido.");
         } else {
-            if (ex == true && !nombre.equalsIgnoreCase(nombreViejo) ) {
+            if (ex == true && !nombre.equalsIgnoreCase(nombreViejo)) {
                 JOptionPane.showMessageDialog(null, "No esta permitido cambiar el nombre de la carta por el de otra carta ya existente.");
             } else {
                 tEAñadido.setText("Carta modificada.");
-                Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa);
+                Metodos.editar(nombreViejo, nombre, tipo, rareza, habilidad, cmc, color, fuerza, defensa, lealtad);
                 vEditar.setVisible(true);
                 this.cENombre.setModel(con.LlenarComboBox());
                 this.cBNombre.setModel(con.LlenarComboBox());
             }
-            
+
         }
     }//GEN-LAST:event_bEditarActionPerformed
 
@@ -1831,9 +1945,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel eACmc;
     private javax.swing.JLabel eADefensa;
     private javax.swing.JLabel eAFuerza;
+    private javax.swing.JLabel eALealtad;
     private javax.swing.JLabel eECmc;
     private javax.swing.JLabel eEDefensa;
     private javax.swing.JLabel eEFuerza;
+    private javax.swing.JLabel eELealtad;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1895,11 +2011,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton rEVerde;
     private javax.swing.JLabel separador;
     private javax.swing.JTextField tACmc;
+    private javax.swing.JTextField tALealtad;
     private javax.swing.JTextField tANombre;
     private javax.swing.JTextArea tAhabilidad;
     private javax.swing.JLabel tAñadido;
     private javax.swing.JLabel tEAñadido;
     private javax.swing.JTextField tECmc;
+    private javax.swing.JTextField tELealtad;
     private javax.swing.JTextField tENombre;
     private javax.swing.JTextArea tEhabilidad;
     private javax.swing.JTable tabla;

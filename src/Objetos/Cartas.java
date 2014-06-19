@@ -73,4 +73,7 @@ public class Cartas{
     public int getDef(Cartas c){
         return 0;
     }
+    public int getLeal (Cartas c){
+        return 0;
+    }
 }
